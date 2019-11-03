@@ -25,5 +25,5 @@ function readTextFile(file, callback) {
 //usage:
 readTextFile("ovitest.json", function(text){
     var data = JSON.parse(text);
-    console.log(data);
+    console.log(data["201914"]["Shots"]);
 });
