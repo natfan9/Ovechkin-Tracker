@@ -10,7 +10,7 @@ var avg = sum/period;
 
 console.log(avg);
 
-function readTextFile(file, callback) {
+/*function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", file, true);
@@ -26,4 +26,14 @@ function readTextFile(file, callback) {
 readTextFile("ovitest.json", function(text){
     var data = JSON.parse(text);
     console.log(data["201914"]["Shots"]);
-});
+});*/
+
+var originaldata = "ovitest.json";
+var request = new XMLHttpRequest();
+request.open('GET', originaldata);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+	console.log(request.response);
+}
