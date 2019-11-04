@@ -36,4 +36,31 @@ request.send();
 
 request.onload = function() {
 	console.log(request.response);
+	var bunchadata = request.response;
+	runShots(bunchadata);
 }
+
+function runShots(jsonObj) {
+	for (const shots in jsonObj) {
+		console.log(jsonObj[shots]["Shots"]);
+	}
+}
+
+/*var foo = {
+	"201901": {
+		"Goals": 1,
+		"Shots": 5,
+	},
+	"201902": {
+		"Goals": 0,
+		"Shots": 7,
+	},
+	"201903": {
+		"Goals": 2,
+		"Shots": 2,
+	},
+}
+
+for (const shots in foo) {
+	console.log(foo[shots]["Shots"]);
+}*/
