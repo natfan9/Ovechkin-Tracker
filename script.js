@@ -5,7 +5,6 @@ request.responseType = 'json';
 request.send();
 
 request.onload = function() {
-	console.log(request.response);
 	var bunchadata = request.response;
 	var evshots = evShotsPer60(bunchadata);
 	document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
@@ -70,7 +69,7 @@ function evDisplayTOI(jsonObj) {
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
 	var minutes = Math.floor(avgtime / 60);
-	var seconds = 8;
+	var seconds = Math.floor(avgtime % 60);
 	
 	if (seconds < 10) {
 		return minutes + ":0" + seconds;
@@ -159,7 +158,6 @@ function ppDisplayTOI(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["PP TOI"]);
 	}
-	console.log(totaltime);
 
 	var period = 82;
 	
@@ -168,7 +166,6 @@ function ppDisplayTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
