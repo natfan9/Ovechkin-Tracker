@@ -41,21 +41,36 @@ request.onload = function() {
 }
 
 function evShotsPer60(jsonObj) {
-	var totalshots = [];
+	var totalevshots = [];
+	var totaltime = [];
 	for (const shots in jsonObj) {
-		console.log(jsonObj[shots]["Shots"]);
-		totalshots.push(jsonObj[shots]["Shots"]);
+		totalevshots.push(jsonObj[shots]["EV Shots"]);
 	}
-	console.log(totalshots);
-	
-	var sum = 0;
+	for (const time in jsonObj) {
+		totaltime.push(jsonObj[time]["EV TOI"]);
+	}
+	console.log(totalevshots);
+	console.log(totaltime);
+
 	var period = 20;
-	for (var i = 0; i < period; i++) {
-    	sum += totalshots[totalshots.length-period+i];
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
 	}
+	var avgshots = shotssum/period;
+	console.log(avgshots);
 	
-	var avg = sum/period;
+	var timesum = 0;
+	for (var b = 0; b < period; b++) {
+    	timesum += totaltime[totaltime.length-period+b];
+	}
+	var avgtime = timesum/period;
+	console.log(avgtime);
 	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
 	console.log(avg);
 }
 
