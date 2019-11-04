@@ -12,6 +12,8 @@ request.onload = function() {
 	var evdisplaytoi = evDisplayTOI(bunchadata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
 	var evtoi = evTOI(bunchadata);
+	var evshootpct = evShootPct(bunchadata);
+	document.getElementById("evpct").innerHTML = evshootpct.toPrecision(4) + "%";
 }
 
 function evShotsPer60(jsonObj) {
@@ -67,7 +69,7 @@ function evDisplayTOI(jsonObj) {
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
 	var minutes = Math.floor(avgtime / 60);
-	var seconds = avgtime % 60;
+	var seconds = Math.floor(avgtime % 60);
 	
 	return hours + ":" + minutes + ":" + seconds;
 }
@@ -89,4 +91,36 @@ function evTOI(jsonObj) {
 	console.log(avgtime);
 	
 	return avgtime;
+}
+
+function evShootPct(jsonObj) {
+	var totalevshots = [];
+	var totalevgoals = [];
+	for (const shots in jsonObj) {
+		totalevshots.push(jsonObj[shots]["EV Shots"]);
+	}
+	for (const goals in jsonObj) {
+		totalevgoals.push(jsonObj[goals]["EV Goals"]);
+	}
+	console.log(totalevshots);
+	console.log(totalevgoals);
+
+	var period = 246;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	console.log(avgshots);
+	
+	var goalssum = 0;
+	for (var b = 0; b < period; b++) {
+    	goalssum += totalevgoals[totalevgoals.length-period+b];
+	}
+	var avggoals = goalssum/period;
+	console.log(avggoals);
+		
+	var avg = avggoals/avgshots * 100;
+	return avg;
 }
