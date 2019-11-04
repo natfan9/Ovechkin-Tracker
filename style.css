@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+td.label {
+	width: 150px;
+}
+
+td.number {
+	width: 60px;
+	text-align: center;
+}
+
+td,th {
+	border: solid 1px;
+	padding: 3px;
+}

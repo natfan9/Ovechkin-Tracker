@@ -69,7 +69,7 @@ function evDisplayTOI(jsonObj) {
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
 	var minutes = Math.floor(avgtime / 60);
-	var seconds = Math.floor(avgtime % 60);
+	var seconds = Math.round(avgtime % 60);
 	
 	if (seconds < 10) {
 		return minutes + ":0" + seconds;
@@ -170,7 +170,7 @@ function ppDisplayTOI(jsonObj) {
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
 	var minutes = Math.floor(avgtime / 60);
-	var seconds = Math.floor(avgtime % 60);
+	var seconds = Math.round(avgtime % 60);
 	
 	if (seconds < 10) {
 		return minutes + ":0" + seconds;
