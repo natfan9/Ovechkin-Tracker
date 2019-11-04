@@ -5,20 +5,20 @@ request.responseType = 'json';
 request.send();
 
 request.onload = function() {
-	var bunchadata = request.response;
-	var evshots = evShotsPer60(bunchadata);
+	var maindata = request.response;
+	var evshots = evShotsPer60(maindata);
 	document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
-	var evdisplaytoi = evDisplayTOI(bunchadata);
+	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
-	var evtoi = evTOI(bunchadata);
-	var evshootpct = evShootPct(bunchadata);
+	var evtoi = evTOI(maindata);
+	var evshootpct = evShootPct(maindata);
 	document.getElementById("evpct").innerHTML = evshootpct.toPrecision(4) + "%";
-	var ppshots = ppShotsPer60(bunchadata);
+	var ppshots = ppShotsPer60(maindata);
 	document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
-	var ppdisplaytoi = ppDisplayTOI(bunchadata);
+	var ppdisplaytoi = ppDisplayTOI(maindata);
 	document.getElementById("pptoi").innerHTML = ppdisplaytoi;
-	var pptoi = ppTOI(bunchadata);
-	var ppshootpct = ppShootPct(bunchadata);
+	var pptoi = ppTOI(maindata);
+	var ppshootpct = ppShootPct(maindata);
 	document.getElementById("pppct").innerHTML = ppshootpct.toPrecision(4) + "%";
 }
 
