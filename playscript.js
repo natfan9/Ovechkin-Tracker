@@ -37,13 +37,16 @@ request.send();
 request.onload = function() {
 	console.log(request.response);
 	var bunchadata = request.response;
-	runShots(bunchadata);
+	evShotsPer60(bunchadata);
 }
 
-function runShots(jsonObj) {
+function evShotsPer60(jsonObj) {
+	var totalshots = [];
 	for (const shots in jsonObj) {
 		console.log(jsonObj[shots]["Shots"]);
+		totalshots.push(jsonObj[shots]["Shots"]);
 	}
+	console.log(totalshots);
 }
 
 /*var foo = {
