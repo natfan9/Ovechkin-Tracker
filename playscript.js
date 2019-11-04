@@ -1,4 +1,4 @@
-var testaverage = [5, 2, 7, 6, 2, 2, 6, 2, 8, 5, 5, 9, 1, 10, 2, 10];
+/*var testaverage = [5, 2, 7, 6, 2, 2, 6, 2, 8, 5, 5, 9, 1, 10, 2, 10];
 
 var sum = 0;
 var period = 10;
@@ -8,7 +8,7 @@ for( var i = 0; i < period; i++ ){
 
 var avg = sum/period;
 
-console.log(avg);
+console.log(avg);*/
 
 /*function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
@@ -47,6 +47,16 @@ function evShotsPer60(jsonObj) {
 		totalshots.push(jsonObj[shots]["Shots"]);
 	}
 	console.log(totalshots);
+	
+	var sum = 0;
+	var period = 20;
+	for (var i = 0; i < period; i++) {
+    	sum += totalshots[totalshots.length-period+i];
+	}
+	
+	var avg = sum/period;
+	
+	console.log(avg);
 }
 
 /*var foo = {
