@@ -32,9 +32,7 @@ function evShotsPer60(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["EV TOI"]);
 	}
-	console.log(totalevshots);
-	console.log(totaltime);
-
+	
 	var period = 20;
 	
 	var shotssum = 0;
@@ -42,14 +40,12 @@ function evShotsPer60(jsonObj) {
     	shotssum += totalevshots[totalevshots.length-period+a];
 	}
 	var avgshots = shotssum/period;
-	console.log(avgshots);
 	
 	var timesum = 0;
 	for (var b = 0; b < period; b++) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -62,7 +58,6 @@ function evDisplayTOI(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["EV TOI"]);
 	}
-	console.log(totaltime);
 
 	var period = 82;
 	
@@ -71,14 +66,17 @@ function evDisplayTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
 	var minutes = Math.floor(avgtime / 60);
-	var seconds = Math.floor(avgtime % 60);
+	var seconds = 8;
 	
-	return minutes + ":" + seconds;
+	if (seconds < 10) {
+		return minutes + ":0" + seconds;
+	} else {
+		return minutes + ":" + seconds;
+	}
 }
 
 function evTOI(jsonObj) {
@@ -86,7 +84,6 @@ function evTOI(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["EV TOI"]);
 	}
-	console.log(totaltime);
 
 	var period = 82;
 	
@@ -95,7 +92,6 @@ function evTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	return avgtime;
 }
@@ -109,8 +105,6 @@ function evShootPct(jsonObj) {
 	for (const goals in jsonObj) {
 		totalevgoals.push(jsonObj[goals]["EV Goals"]);
 	}
-	console.log(totalevshots);
-	console.log(totalevgoals);
 
 	var period = 246;
 	
@@ -119,14 +113,12 @@ function evShootPct(jsonObj) {
     	shotssum += totalevshots[totalevshots.length-period+a];
 	}
 	var avgshots = shotssum/period;
-	console.log(avgshots);
 	
 	var goalssum = 0;
 	for (var b = 0; b < period; b++) {
     	goalssum += totalevgoals[totalevgoals.length-period+b];
 	}
 	var avggoals = goalssum/period;
-	console.log(avggoals);
 		
 	var avg = avggoals/avgshots * 100;
 	return avg;
@@ -141,8 +133,6 @@ function ppShotsPer60(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["PP TOI"]);
 	}
-	console.log(totalppshots);
-	console.log(totaltime);
 
 	var period = 20;
 	
@@ -151,14 +141,12 @@ function ppShotsPer60(jsonObj) {
     	shotssum += totalppshots[totalppshots.length-period+a];
 	}
 	var avgshots = shotssum/period;
-	console.log(avgshots);
 	
 	var timesum = 0;
 	for (var b = 0; b < period; b++) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -187,7 +175,11 @@ function ppDisplayTOI(jsonObj) {
 	var minutes = Math.floor(avgtime / 60);
 	var seconds = Math.floor(avgtime % 60);
 	
-	return minutes + ":" + seconds;
+	if (seconds < 10) {
+		return minutes + ":0" + seconds;
+	} else {
+		return minutes + ":" + seconds;
+	}
 }
 
 function ppTOI(jsonObj) {
@@ -195,7 +187,6 @@ function ppTOI(jsonObj) {
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["PP TOI"]);
 	}
-	console.log(totaltime);
 
 	var period = 82;
 	
@@ -204,7 +195,6 @@ function ppTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
-	console.log(avgtime);
 	
 	return avgtime;
 }
@@ -218,8 +208,6 @@ function ppShootPct(jsonObj) {
 	for (const goals in jsonObj) {
 		totalppgoals.push(jsonObj[goals]["PP Goals"]);
 	}
-	console.log(totalppshots);
-	console.log(totalppgoals);
 
 	var period = 246;
 	
@@ -228,14 +216,12 @@ function ppShootPct(jsonObj) {
     	shotssum += totalppshots[totalppshots.length-period+a];
 	}
 	var avgshots = shotssum/period;
-	console.log(avgshots);
 	
 	var goalssum = 0;
 	for (var b = 0; b < period; b++) {
     	goalssum += totalppgoals[totalppgoals.length-period+b];
 	}
 	var avggoals = goalssum/period;
-	console.log(avggoals);
 		
 	var avg = avggoals/avgshots * 100;
 	return avg;
