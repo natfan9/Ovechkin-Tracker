@@ -11,18 +11,20 @@ request.onload = function() {
 	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
 	var evtoi = evTOI(maindata);
-	var evshootpct = evShootPct(maindata);
-	document.getElementById("evpct").innerHTML = evshootpct.toPrecision(4) + "%";
+	var evpct = evShootPct(maindata);
+	var evdisplaypct = evpct * 100;
+	document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
 	var ppshots = ppShotsPer60(maindata);
 	document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
 	var ppdisplaytoi = ppDisplayTOI(maindata);
 	document.getElementById("pptoi").innerHTML = ppdisplaytoi;
 	var pptoi = ppTOI(maindata);
-	var ppshootpct = ppShootPct(maindata);
-	document.getElementById("pppct").innerHTML = ppshootpct.toPrecision(4) + "%";
+	var pppct = ppShootPct(maindata);
+	var ppdisplaypct = pppct * 100;
+	document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
 	
-	var evgpg = evshots * evtoi * evshootpct;
-	var ppgpg = ppshots * pptoi * ppshootpct;
+	var evgpg = evshots * evtoi * evpct;
+	var ppgpg = ppshots * pptoi * pppct;
 	
 	console.log(evgpg);
 	console.log(ppgpg);
@@ -127,7 +129,7 @@ function evShootPct(jsonObj) {
 	}
 	var avggoals = goalssum/period;
 		
-	var avg = avggoals/avgshots * 100;
+	var avg = avggoals/avgshots;
 	return avg;
 }
 
@@ -230,6 +232,6 @@ function ppShootPct(jsonObj) {
 	}
 	var avggoals = goalssum/period;
 		
-	var avg = avggoals/avgshots * 100;
+	var avg = avggoals/avgshots;
 	return avg;
 }
