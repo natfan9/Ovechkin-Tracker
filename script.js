@@ -20,6 +20,12 @@ request.onload = function() {
 	var pptoi = ppTOI(maindata);
 	var ppshootpct = ppShootPct(maindata);
 	document.getElementById("pppct").innerHTML = ppshootpct.toPrecision(4) + "%";
+	
+	var evgpg = evshots * evtoi * evshootpct;
+	var ppgpg = ppshots * pptoi * ppshootpct;
+	
+	console.log(evgpg);
+	console.log(ppgpg);
 }
 
 function evShotsPer60(jsonObj) {
@@ -91,6 +97,8 @@ function evTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
+	
+	avgtime = avgtime / 60 / 60;
 	
 	return avgtime;
 }
@@ -192,6 +200,8 @@ function ppTOI(jsonObj) {
     	timesum += totaltime[totaltime.length-period+b];
 	}
 	var avgtime = timesum/period;
+	
+	avgtime = avgtime / 60 / 60;
 	
 	return avgtime;
 }
