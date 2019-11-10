@@ -10,6 +10,10 @@ td.number {
 	text-align: center;
 }
 
+td.compstats {
+	font-weight: bold;
+}
+
 td,th {
 	border: solid 1px;
 	padding: 3px;

@@ -33,6 +33,8 @@ request.onload = function() {
 	
 	var games = seasonGames(maindata);
 	document.getElementById("compgames").innerHTML = games;
+	var goals = seasonGoals(maindata);
+	document.getElementById("compgoals").innerHTML = goals;
 }
 
 function evShotsPer60(jsonObj) {
@@ -249,6 +251,21 @@ function seasonGames(jsonObj) {
 		}
 	}
 		
-	console.log(seasongames);
 	return seasongames.length;
+}
+
+function seasonGoals(jsonObj) {
+	var seasongoals = [];
+	for (const season in jsonObj) {
+		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
+			seasongoals.push(jsonObj[season]["Goals"]);
+		}
+	}
+	
+	var goalssum = 0;
+	for (var a = 0; a < seasongoals.length; a++) {
+    	goalssum += seasongoals[a];
+	}
+		
+	return goalssum;
 }
