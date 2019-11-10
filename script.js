@@ -245,7 +245,7 @@ function seasonGames(jsonObj) {
 	var seasongames = [];
 	for (const season in jsonObj) {
 		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
-			seasongames.push(jsonObj[goals]["Goals"]);
+			seasongames.push(jsonObj[season]["Goals"]);
 		}
 	}
 		
