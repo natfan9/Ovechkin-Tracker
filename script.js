@@ -1,3 +1,5 @@
+var currentseason = 2019;
+
 var originaldata = "ovitest.json";
 var request = new XMLHttpRequest();
 request.open('GET', originaldata);
@@ -242,7 +244,7 @@ function ppShootPct(jsonObj) {
 function seasonGames(jsonObj) {
 	var seasongames = [];
 	for (const season in jsonObj) {
-		if (jsonObj[season]["Game"].startsWith("2019")) {
+		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
 			for (const goals in jsonObj) {
 				seasongames.push(jsonObj[goals]["Goals"]);
 			}
