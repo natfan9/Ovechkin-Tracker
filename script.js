@@ -29,7 +29,7 @@ request.onload = function() {
 	console.log(evgpg);
 	console.log(ppgpg);
 	
-	var games = seasonEVGoals(maindata);
+	var games = seasonGames(maindata);
 	document.getElementById("compgames").innerHTML = games;
 }
 
