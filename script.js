@@ -17,7 +17,7 @@ request.onload = function() {
 	
 	var shotsweight = function() {
 		if (games < 20) {
-			return 100 - games * 2;
+			return 100 - (games * 2);
 		} else {
 			return 60;
 		}
