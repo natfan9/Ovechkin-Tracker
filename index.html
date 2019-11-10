@@ -7,7 +7,8 @@
 </head>
 <body>
 	<script type="text/javascript" src="script.js"></script>
-	<table>
+	<div class="container">
+	<div class="table"><table>
 		<tr>
 			<th colspan="2">Season Completed</th>
 		</tr>
@@ -23,7 +24,7 @@
 			<th colspan="2">Even Strength</th>
 		</tr>
 		<tr>
-			<td class="label inputstats">Weighted Shots/60</td>
+			<td class="label inputstats">20 Game Shots/60</td>
 			<td class="number inputstats" id="evshots">0</td>
 		</tr>
 		<tr>
@@ -64,6 +65,24 @@
 			<td class="label">Total Goals</td>
 			<td class="number outputstats" id="totalgoals"><b>0</b></td>
 		</tr>
-	</table>
+	</table></div>
+	<div class="right">
+		<h1>Update Log</h1>
+		<ul>
+			<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage</li>
+		</ul>
+		<h2>In Development</h2>
+		<ul>
+			<li><b>v1.0:</b> Averaging in stats from current season on a weighted basis</li>
+		</ul>
+		<h2>Potential Future Plans</h2>
+		<ul>
+			<li>Add milestone tracker based on listed projections</li>
+			<li>Further separate situations from even strenth and power play to 6v5, 5v6, 5v5, 4v4, 3v3, 5v4, 5v3, and 4v3</li>
+			<li>Allow users to toggle off and on levels of detail on projection</li>
+			<li>Auto update data from NHL instea of manually updating</li>
+		</ul>
+	</div>
+	</div>
 </body>
 </html>

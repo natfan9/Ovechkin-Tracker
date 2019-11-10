@@ -20,6 +20,26 @@ request.onload = function() {
 		}
 	}
 	
+	function timeWeight() {
+		games = seasonGames(maindata);
+		
+		if (games < 20) {
+			return 100 - (games * 4);
+		} else {
+			return 20;
+		}
+	}
+	
+	function pctWeight() {
+		games = seasonGames(maindata);
+		
+		if (games < 40) {
+			return 100 - (games * 1.5);
+		} else {
+			return 40;
+		}
+	}
+	
 	var games = seasonGames(maindata);
 	document.getElementById("compgames").innerHTML = games;
 	var goals = seasonGoals(maindata);
@@ -30,7 +50,7 @@ request.onload = function() {
 	var evshots20 = evShotsPer60(maindata);
 	var evshotsseason = seasonEVShotsPer60(maindata);
 	var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
-	document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+	document.getElementById("evshots").innerHTML = evshots20.toPrecision(4);
 	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
 	var evtoi = evTOI(maindata);
@@ -46,7 +66,7 @@ request.onload = function() {
 	var ppdisplaypct = pppct * 100;
 	document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
 	
-	var evgpg = evshots * evtoi * evpct;
+	var evgpg = evshots20 * evtoi * evpct;
 	var ppgpg = ppshots * pptoi * pppct;
 	
 	var evgoals = seasonEVGoals(maindata);
