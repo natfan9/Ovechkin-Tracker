@@ -10,7 +10,7 @@ td.number {
 	text-align: center;
 }
 
-td.compstats {
+td.compstats,td.outputstats {
 	font-weight: bold;
 }
 

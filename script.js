@@ -1,4 +1,5 @@
 var currentseason = 2019;
+var gamestoplay = 82;
 
 var originaldata = "ovitest.json";
 var request = new XMLHttpRequest();
@@ -35,6 +36,19 @@ request.onload = function() {
 	document.getElementById("compgames").innerHTML = games;
 	var goals = seasonGoals(maindata);
 	document.getElementById("compgoals").innerHTML = goals;
+	
+	var evgoals = seasonEVGoals(maindata);
+	var ppgoals = seasonPPGoals(maindata);
+	
+	var evgoalsrem = evgpg * (gamestoplay - games);
+	var ppgoalsrem = ppgpg * (gamestoplay - games);
+	
+	var projevgoals = evgoals + evgoalsrem;
+	document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4)
+	var projppgoals = ppgoals + ppgoalsrem;
+	document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4)
+	var projtotalgoals = projevgoals + projppgoals;
+	document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4)
 }
 
 function evShotsPer60(jsonObj) {
@@ -259,6 +273,38 @@ function seasonGoals(jsonObj) {
 	for (const season in jsonObj) {
 		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
 			seasongoals.push(jsonObj[season]["Goals"]);
+		}
+	}
+	
+	var goalssum = 0;
+	for (var a = 0; a < seasongoals.length; a++) {
+    	goalssum += seasongoals[a];
+	}
+		
+	return goalssum;
+}
+
+function seasonEVGoals(jsonObj) {
+	var seasongoals = [];
+	for (const season in jsonObj) {
+		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
+			seasongoals.push(jsonObj[season]["EV Goals"]);
+		}
+	}
+	
+	var goalssum = 0;
+	for (var a = 0; a < seasongoals.length; a++) {
+    	goalssum += seasongoals[a];
+	}
+		
+	return goalssum;
+}
+
+function seasonPPGoals(jsonObj) {
+	var seasongoals = [];
+	for (const season in jsonObj) {
+		if (jsonObj[season]["Game"].startsWith("G" + currentseason)) {
+			seasongoals.push(jsonObj[season]["PP Goals"]);
 		}
 	}
 	
