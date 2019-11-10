@@ -242,7 +242,7 @@ function ppShootPct(jsonObj) {
 function seasonGames(jsonObj) {
 	var seasongames = [];
 	for (const goals in jsonObj) {
-		if (jsonObj.startsWith("2019")) {
+		if (jsonObj["Game"].startsWith("2019")) {
 			seasonevgoals.push(jsonObj[goals]["Goals"]);
 		}
 	}
