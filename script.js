@@ -9,9 +9,23 @@ request.send();
 
 request.onload = function() {
 	var maindata = request.response;
+	
+	var games = seasonGames(maindata);
+	document.getElementById("compgames").innerHTML = games;
+	var goals = seasonGoals(maindata);
+	document.getElementById("compgoals").innerHTML = goals;
+	
+	var shotsweight = function() {
+		if (games < 20) {
+			return 100 - games * 2;
+		} else {
+			return 60;
+		}
+	};
+	
 	var evshots20 = evShotsPer60(maindata);
 	var evshotsseason = seasonEVShotsPer60(maindata);
-	var evshots = weightedAvg([evshots20,evshotsseason],[64,36]);
+	var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
 	document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
 	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
@@ -30,14 +44,6 @@ request.onload = function() {
 	
 	var evgpg = evshots * evtoi * evpct;
 	var ppgpg = ppshots * pptoi * pppct;
-	
-	console.log(evgpg);
-	console.log(ppgpg);
-	
-	var games = seasonGames(maindata);
-	document.getElementById("compgames").innerHTML = games;
-	var goals = seasonGoals(maindata);
-	document.getElementById("compgoals").innerHTML = goals;
 	
 	var evgoals = seasonEVGoals(maindata);
 	var ppgoals = seasonPPGoals(maindata);
