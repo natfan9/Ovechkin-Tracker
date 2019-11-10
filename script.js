@@ -28,6 +28,8 @@ request.onload = function() {
 	
 	console.log(evgpg);
 	console.log(ppgpg);
+	
+	seasonEVGoals(maindata);
 }
 
 function evShotsPer60(jsonObj) {
@@ -234,4 +236,15 @@ function ppShootPct(jsonObj) {
 		
 	var avg = avggoals/avgshots;
 	return avg;
+}
+
+function seasonEVGoals(jsonObj) {
+	var seasonevgoals = [];
+	for (const goals in jsonObj) {
+		if (jsonObj.startsWith("2019")) {
+			seasonevgoals.push(jsonObj[goals]["EV Goals"]);
+		}
+	}
+	
+	console.log(seasonevgoals);
 }

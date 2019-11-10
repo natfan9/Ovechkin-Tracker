@@ -2880,5 +2880,16 @@
       "PP Goals": 1,
       "PP TOI": 349,
       "PP Shots": 2
+   },
+   "201918": {
+      "Goals": 0,
+      "TOI": 1281,
+      "Shots": 6,
+      "EV Goals": 0,
+      "EV TOI": 737,
+      "EV Shots": 3,
+      "PP Goals": 0,
+      "PP TOI": 544,
+      "PP Shots": 3
    }
 }
