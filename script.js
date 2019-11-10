@@ -10,18 +10,22 @@ request.send();
 request.onload = function() {
 	var maindata = request.response;
 	
-	var games = seasonGames(maindata);
-	document.getElementById("compgames").innerHTML = games;
-	var goals = seasonGoals(maindata);
-	document.getElementById("compgoals").innerHTML = goals;
-	
-	var shotsweight = function() {
+	function shotsWeight() {
+		games = seasonGames(maindata);
+		
 		if (games < 20) {
 			return 100 - (games * 2);
 		} else {
 			return 60;
 		}
-	};
+	}
+	
+	var games = seasonGames(maindata);
+	document.getElementById("compgames").innerHTML = games;
+	var goals = seasonGoals(maindata);
+	document.getElementById("compgoals").innerHTML = goals;
+	
+	var shotsweight = shotsWeight();
 	
 	var evshots20 = evShotsPer60(maindata);
 	var evshotsseason = seasonEVShotsPer60(maindata);
