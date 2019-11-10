@@ -29,7 +29,8 @@ request.onload = function() {
 	console.log(evgpg);
 	console.log(ppgpg);
 	
-	seasonEVGoals(maindata);
+	var games = seasonEVGoals(maindata);
+	document.getElementById("compgames").innerHTML = games;
 }
 
 function evShotsPer60(jsonObj) {
@@ -238,13 +239,14 @@ function ppShootPct(jsonObj) {
 	return avg;
 }
 
-function seasonEVGoals(jsonObj) {
-	var seasonevgoals = [];
+function seasonGames(jsonObj) {
+	var seasongames = [];
 	for (const goals in jsonObj) {
 		if (jsonObj.startsWith("2019")) {
-			seasonevgoals.push(jsonObj[goals]["EV Goals"]);
+			seasonevgoals.push(jsonObj[goals]["Goals"]);
 		}
 	}
 	
-	console.log(seasonevgoals);
+	console.log(seasongames);
+	return seasongames.length;
 }
