@@ -40,17 +40,38 @@ request.onload = function() {
 		}
 	}
 	
+	function evDisplayTOI() {
+		var time82games = evTOI(maindata);
+		var timeseason = seasonEVTOI(maindata);
+		
+		var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+		
+		var hours = Math.floor(avgtime / 3600);
+		avgtime %= 3600;
+		var minutes = Math.floor(avgtime / 60);
+		var seconds = Math.round(avgtime % 60);
+		
+		if (seconds < 10) {
+			return minutes + ":0" + seconds;
+		} else {
+			return minutes + ":" + seconds;
+		}
+	}
+	
 	var games = seasonGames(maindata);
 	document.getElementById("compgames").innerHTML = games;
 	var goals = seasonGoals(maindata);
 	document.getElementById("compgoals").innerHTML = goals;
 	
 	var shotsweight = shotsWeight();
+	var timeweight = timeWeight();
+	var pctweight = pctWeight();
 	
 	var evshots20 = evShotsPer60(maindata);
 	var evshotsseason = seasonEVShotsPer60(maindata);
 	var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
 	document.getElementById("evshots").innerHTML = evshots20.toPrecision(4);
+	
 	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
 	var evtoi = evTOI(maindata);
@@ -128,7 +149,7 @@ function evShotsPer60(jsonObj) {
 	var avg = avgshots/avgtimehour;
 	return avg;
 }
-
+/**
 function evDisplayTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
@@ -154,7 +175,7 @@ function evDisplayTOI(jsonObj) {
 		return minutes + ":" + seconds;
 	}
 }
-
+**/
 function evTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
@@ -337,19 +358,19 @@ function seasonEVShotsPer60(jsonObj) {
 	return avg;
 }
 /**
-function evDisplayTOI(jsonObj) {
+function seasonEVDisplayTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["EV TOI"]);
+		}
 	}
 
-	var period = 82;
-	
 	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
 	}
-	var avgtime = timesum/period;
+	var avgtime = timesum/totaltime.length;
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
@@ -362,26 +383,26 @@ function evDisplayTOI(jsonObj) {
 		return minutes + ":" + seconds;
 	}
 }
-
-function evTOI(jsonObj) {
+**/
+function seasonEVTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["EV TOI"]);
+		}
 	}
-
-	var period = 82;
 	
 	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
 	}
-	var avgtime = timesum/period;
+	var avgtime = timesum/totaltime.length;
 	
 	avgtime = avgtime / 60 / 60;
 	
 	return avgtime;
 }
-
+/**
 function evShootPct(jsonObj) {
 	var totalevshots = [];
 	var totalevgoals = [];
