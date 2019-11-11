@@ -547,7 +547,7 @@ function seasonPPTOI(jsonObj) {
 	for (var b = 0; b < totaltime.length; b++) {
     	timesum += totaltime[b];
 	}
-	var avgtime = timesum/totaltime.lengthgth;
+	var avgtime = timesum/totaltime.length;
 	
 	avgtime = avgtime / 60 / 60;
 	
