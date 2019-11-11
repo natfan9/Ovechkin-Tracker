@@ -45,8 +45,8 @@ request.onload = function() {
 	}
 	
 	function evDisplayTOI() {
-		var time82games = evTOI(maindata);
-		var timeseason = seasonEVTOI(maindata);
+		var time82games = evTOI(maindata) * 60 * 60;
+		var timeseason = seasonEVTOI(maindata) * 60 * 60;
 		console.log(time82games);
 		console.log(timeseason);
 		
