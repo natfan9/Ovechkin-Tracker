@@ -150,7 +150,7 @@ request.onload = function() {
 	var projtotalgoals = projevgoals + projppgoals;
 	document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
 	var projcareergoals = careergoals + projtotalgoals;
-	document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(4);
+	document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
 }
 
 function weightedAvg(arrValues, arrWeights) {
