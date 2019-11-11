@@ -1,5 +1,6 @@
 var currentseason = 2019;
 var gamestoplay = 82;
+var careergoals = 658;
 
 var originaldata = "ovitest.json";
 var request = new XMLHttpRequest();
@@ -84,6 +85,8 @@ request.onload = function() {
 	document.getElementById("compgames").innerHTML = games;
 	var goals = seasonGoals(maindata);
 	document.getElementById("compgoals").innerHTML = goals;
+	var newcareergoals = careergoals + goals;
+	document.getElementById("careergoals").innerHTML = newcareergoals;
 	
 	//Even Strength Shots
 	var evshots20 = evShotsPer60(maindata);
@@ -146,6 +149,8 @@ request.onload = function() {
 	document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
 	var projtotalgoals = projevgoals + projppgoals;
 	document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+	var projcareergoals = careergoals + projtotalgoals;
+	document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(4);
 }
 
 function weightedAvg(arrValues, arrWeights) {
