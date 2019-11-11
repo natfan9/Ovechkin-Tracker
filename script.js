@@ -498,7 +498,7 @@ function seasonPPShotsPer60(jsonObj) {
 	var avgshots = shotssum/totalppshots.length;
 	
 	var timesum = 0;
-	for (var b = 0; b < ttotaltime.length; b++) {
+	for (var b = 0; b < totaltime.length; b++) {
     	timesum += totaltime[b];
 	}
 	var avgtime = timesum/totaltime.length;
