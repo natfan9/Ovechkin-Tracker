@@ -10,6 +10,10 @@ request.send();
 request.onload = function() {
 	var maindata = request.response;
 	
+	var shotsweight = shotsWeight();
+	var timeweight = timeWeight();
+	var pctweight = pctWeight();
+	
 	function shotsWeight() {
 		games = seasonGames(maindata);
 		
@@ -43,8 +47,12 @@ request.onload = function() {
 	function evDisplayTOI() {
 		var time82games = evTOI(maindata);
 		var timeseason = seasonEVTOI(maindata);
+		console.log(time82games);
+		console.log(timeseason);
 		
 		var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+		console.log(avgtime);
+		console.log(timeweight);
 		
 		var hours = Math.floor(avgtime / 3600);
 		avgtime %= 3600;
@@ -63,10 +71,6 @@ request.onload = function() {
 	var goals = seasonGoals(maindata);
 	document.getElementById("compgoals").innerHTML = goals;
 	
-	var shotsweight = shotsWeight();
-	var timeweight = timeWeight();
-	var pctweight = pctWeight();
-	
 	var evshots20 = evShotsPer60(maindata);
 	var evshotsseason = seasonEVShotsPer60(maindata);
 	var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
@@ -74,7 +78,7 @@ request.onload = function() {
 	
 	var evdisplaytoi = evDisplayTOI(maindata);
 	document.getElementById("evtoi").innerHTML = evdisplaytoi;
-	var evtoi = evTOI(maindata);
+	//var evtoi = evTOI(maindata);
 	var evpct = evShootPct(maindata);
 	var evdisplaypct = evpct * 100;
 	document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
