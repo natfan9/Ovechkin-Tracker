@@ -14,9 +14,25 @@ td.compstats,td.outputstats {
 	font-weight: bold;
 }
 
+table {
+	border-collapse: collapse;
+}
+
+table,td,th {
+	border: solid 1px #808080;
+}
+
 td,th {
-	border: solid 1px;
-	padding: 3px;
+	padding: 5px;
+}
+
+th {
+	background-color: #ab0003;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #EEEEEE;
 }
 
 body {
