@@ -2,13 +2,17 @@ var currentseason = 2019;
 var gamestoplay = 82;
 var careergoals = 658;
 
+//var projection = projectionFunction();
+
 var originaldata = "ovitest.json";
 var request = new XMLHttpRequest();
 request.open('GET', originaldata);
 request.responseType = 'json';
 request.send();
 
-request.onload = function() {
+request.onload = projectionFunction();
+
+function projectionFunction() {
 	var maindata = request.response;
 	
 	var shotsweight = shotsWeight();
