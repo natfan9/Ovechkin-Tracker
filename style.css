@@ -48,9 +48,9 @@ div.table {
 }
 
 div.right {
-	position: relative;
-	left: 25px;
-	width: 825px;
+	float: left;
+	margin-left: 25px;
+	width: 525px;
 }
 
 div.container {
@@ -65,7 +65,6 @@ div.page {
 
 h2,h3 {
 	position: relative;
-	margin-left: 265px;
 	border-bottom: 3px solid #ab0003;
 	padding-bottom: 5px;
 }
