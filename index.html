@@ -11,7 +11,11 @@
 		<div class="page">
 			<!--<h1>The Projechkin</h1>
 			<p>This is a projection system that factors in recent shot rates, medium term time on ice averages and long term shooting percentages, to attempt to determine how many goals Alex Ovechkin will score in the current season.</p>-->
-		<div class="table">
+		<!--<div class="tab">
+			<button class="tablinks" onclick="openTab(event, 'projection')" id="defaultOpen">Projection</button>
+			<button class="tablinks" onclick="openTab(event, 'updatelog')">Update Log</button>
+		</div>-->
+		<div class="tabcontent table" id="projection">
 			<table>
 				<tr>
 					<th colspan="2">Season Completed</th>
@@ -79,7 +83,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="right">
+		<div class="tabcontent right" id="updatelog">
 			<h2>Update Log</h2>
 			<ul>
 				<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage</li>
