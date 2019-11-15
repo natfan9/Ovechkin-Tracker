@@ -179,16 +179,6 @@ request.onload = function() {
 	document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
 }
 
-var scheduledata = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=15&startDate=2019-10-01&endDate=2020-04-04";
-var schedule = new XMLHttpRequest();
-schedule.open('GET', scheduledata);
-schedule.responseType = 'json';
-schedule.send();
-
-schedule.onload = function() {
-	console.log(schedule.response);
-}
-
 function weightedAvg(arrValues, arrWeights) {
 
   var result = arrValues.map(function (value, i) {
