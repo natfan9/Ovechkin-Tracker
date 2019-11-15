@@ -2,31 +2,20 @@ var currentseason = 2019;
 var gamestoplay = 82;
 var careergoals = 658;
 
-function openTab(evt, tabName) {
-  console.log("Script running...");
-  // Declare all variables
+function openPage(pageName, elmnt) {
+  // Hide all elements with class="tabcontent" by default */
   var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-	
-  console.log("Script run!");
+  // Show the specific tab content
+  document.getElementById(pageName).style.display = "block";
 }
-
-//document.getElementById("defaultOpen").click();
+window.onload = function(){
+	document.getElementById("default").click();
+}
 
 var originaldata = "ovitest.json";
 var request = new XMLHttpRequest();
