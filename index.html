@@ -8,14 +8,14 @@
 <body>
 	<script type="text/javascript" src="script.js"></script>
 	<div class="container">
+		<div class="tab">
+			<button class="tablink" onclick="openPage('projection', this)" id="default">Projection</button>
+			<button class="tablink" onclick="openPage('updatelog', this)">Update Log</button>
+		</div>
 		<div class="page">
 			<!--<h1>The Projechkin</h1>
 			<p>This is a projection system that factors in recent shot rates, medium term time on ice averages and long term shooting percentages, to attempt to determine how many goals Alex Ovechkin will score in the current season.</p>-->
-		<!--<div class="tab">
-			<button class="tablinks" onclick="openTab(event, 'projection')" id="defaultOpen">Projection</button>
-			<button class="tablinks" onclick="openTab(event, 'updatelog')">Update Log</button>
-		</div>-->
-		<div class="tabcontent table" id="projection">
+		<div class="tabcontent" id="projection">
 			<table>
 				<tr>
 					<th colspan="2">Season Completed</th>
@@ -83,16 +83,17 @@
 				</tr>
 			</table>
 		</div>
-		<div class="tabcontent right" id="updatelog">
+		<div class="tabcontent" id="updatelog">
 			<h2>Update Log</h2>
 			<ul>
 				<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage</li>
 				<li><b>v1.0:</b> Averaged in stats from current season on a weighted basis</li>
 				<li><b>v1.0.1:</b> Added current and projected career goals to the table</li>
+				<li><b>v1.1:</b> Added color and different tabs for Projection and Update Log</li>
 			</ul>
 			<h3>Currently In Development</h3>
 			<ul>
-				<li>Adding color and other design elements</li>
+				<li>TBD</li>
 			</ul>
 			<h3>Future Plans</h3>
 			<ul>
