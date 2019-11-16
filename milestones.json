@@ -1,72 +1,72 @@
 [
  {
    "Type": "Goals",
-   "Player": "Gretzky",
+   "Player": "gretzky",
    "Total": 894
  },
  {
    "Type": "Goals",
-   "Player": "Howe",
+   "Player": "howe",
    "Total": 801
  },
  {
    "Type": "Goals",
-   "Player": "Jagr",
+   "Player": "jagr",
    "Total": 766
  },
  {
    "Type": "Goals",
-   "Player": "Hull",
+   "Player": "hull",
    "Total": 741
  },
  {
    "Type": "Goals",
-   "Player": "Dionne",
+   "Player": "dionne",
    "Total": 731
  },
  {
    "Type": "Goals",
-   "Player": "Esposito",
+   "Player": "esposito",
    "Total": 717
  },
  {
    "Type": "Goals",
-   "Player": "Gartner",
+   "Player": "gartner",
    "Total": 708
  },
  {
    "Type": "Goals",
-   "Player": "Messier",
+   "Player": "messier",
    "Total": 694
  },
  {
    "Type": "Goals",
-   "Player": "Yzerman",
+   "Player": "yzerman",
    "Total": 692
  },
  {
    "Type": "Goals",
-   "Player": "Lemieux",
+   "Player": "lemieux",
    "Total": 690
  },
  {
    "Type": "Goals",
-   "Player": "Selanne",
+   "Player": "selanne",
    "Total": 684
  },
  {
    "Type": "PP Goals",
-   "Player": "Andreychuk",
+   "Player": "andreychuk",
    "Total": 274
  },
  {
    "Type": "PP Goals",
-   "Player": "Hull",
+   "Player": "hull",
    "Total": 265
  },
  {
    "Type": "PP Goals",
-   "Player": "Selanne",
+   "Player": "selanne",
    "Total": 252
  }
 ]
