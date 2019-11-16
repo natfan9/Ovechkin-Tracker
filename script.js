@@ -168,7 +168,7 @@ function projectionFunction(neededOutputs) {
 		var projcareergoals = careergoals + projtotalgoals;
 		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
 
-		neededOutputs([games,goals,evgoals,ppgoals,evgpg,ppgpg]);
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
 	}
 }
 
