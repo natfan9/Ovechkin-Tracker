@@ -166,7 +166,11 @@ request.onload = function() {
 	document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
 	var projcareergoals = careergoals + projtotalgoals;
 	document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+	
+	return projtotalgoals;
 }
+
+console.log(request.onload);
 
 function weightedAvg(arrValues, arrWeights) {
 
