@@ -1,6 +1,7 @@
 var currentseason = 2019;
 var gamestoplay = 82;
 var careergoals = 658;
+var careerppgoals = 247;
 
 function openPage(pageName, elmnt) {
   // Hide all elements with class="tabcontent" by default */
@@ -174,8 +175,59 @@ function projectionFunction(neededOutputs) {
 
 projectionFunction(milestoneFunction);
 
-function milestoneFunction(arr) {
-	console.log(arr);
+function milestoneFunction(obj) {
+	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/milestones.json";
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+		//Round Number Milestones
+		var goalsleft675 = 675 - (obj.goals + careergoals);
+		document.getElementById("675goalsleft").innerHTML = goalsleft675;
+		var gamesleft675 = goalsleft675 / (obj.evgpg + obj.ppgpg);
+		document.getElementById("675gamesleft").innerHTML = Math.ceil(gamesleft675);
+		
+		var goalsleft700 = 700 - (obj.goals + careergoals);
+		document.getElementById("700goalsleft").innerHTML = goalsleft700;
+		var gamesleft700 = goalsleft700 / (obj.evgpg + obj.ppgpg);
+		document.getElementById("700gamesleft").innerHTML = Math.ceil(gamesleft700);
+		
+		var goalsleft725 = 725 - (obj.goals + careergoals);
+		document.getElementById("725goalsleft").innerHTML = goalsleft725;
+		var gamesleft725 = goalsleft725 / (obj.evgpg + obj.ppgpg);
+		document.getElementById("725gamesleft").innerHTML = Math.ceil(gamesleft725);
+		
+		//Goals Leaderboard
+		var goalsleaderboard = [];
+		for (const a in maindata) {
+			if (maindata[a]["Type"].startsWith("Goals")) {
+				goalsleaderboard.push(maindata[a]["Player"]);
+			}
+		}
+		for (i = 0; i < goalsleaderboard.length; i++) {
+			var goalsleft = maindata[i]["Total"] - (obj.goals + careergoals);
+			document.getElementById(maindata[i]["Player"] + "goalsleft").innerHTML = goalsleft;
+			var gamesleft = goalsleft / (obj.evgpg + obj.ppgpg);
+			document.getElementById(maindata[i]["Player"] + "gamesleft").innerHTML = Math.ceil(gamesleft);
+		}
+		
+		//PPGs Leaderboard
+		var ppgoalsleaderboard = [];
+		for (const b in maindata) {
+			if (maindata[b]["Type"].startsWith("PP")) {
+				ppgoalsleaderboard.push(maindata[b]["Player"]);
+			}
+		}
+		for (p = goalsleaderboard.length; p < goalsleaderboard.length+ppgoalsleaderboard.length; p++) {
+			var ppgoalsleft = maindata[p]["Total"] - (obj.ppgoals + careerppgoals);
+			document.getElementById(maindata[p]["Player"] + "ppgoalsleft").innerHTML = ppgoalsleft;
+			var ppgamesleft = ppgoalsleft / obj.ppgpg;
+			document.getElementById(maindata[p]["Player"] + "ppgamesleft").innerHTML = Math.ceil(ppgamesleft);
+		}
+	}
 }
 
 function weightedAvg(arrValues, arrWeights) {
