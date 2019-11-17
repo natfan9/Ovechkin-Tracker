@@ -58,7 +58,7 @@ div.page {
 	width: 825px;
 }
 
-h2,h3 {
+h1,h2,h3 {
 	position: relative;
 	border-bottom: 3px solid #ab0003;
 	padding-bottom: 5px;
@@ -98,4 +98,16 @@ h2,h3 {
 	border-top: none;
 	width: 800px;
 	background-color: white;
+}
+
+.intro {
+	width: 800px;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	padding: 6px 12px;
+}
+
+h1,p {
+	margin-top: 5px;
 }
