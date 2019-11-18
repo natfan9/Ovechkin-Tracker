@@ -184,48 +184,113 @@ function milestoneFunction(obj) {
 
 	request.onload = function() {
 		var maindata = request.response;
-		//Round Number Milestones
-		var goalsleft675 = 675 - (obj.goals + careergoals);
-		document.getElementById("675goalsleft").innerHTML = goalsleft675;
-		var gamesleft675 = goalsleft675 / (obj.evgpg + obj.ppgpg);
-		document.getElementById("675gamesleft").innerHTML = Math.ceil(gamesleft675);
 		
-		var goalsleft700 = 700 - (obj.goals + careergoals);
-		document.getElementById("700goalsleft").innerHTML = goalsleft700;
-		var gamesleft700 = goalsleft700 / (obj.evgpg + obj.ppgpg);
-		document.getElementById("700gamesleft").innerHTML = Math.ceil(gamesleft700);
+		var scheduledata = "https://natfan9.github.io/Ovechkin-Tracker/schedule2019.json";
+		var schedule = new XMLHttpRequest();
+		schedule.open('GET', scheduledata);
+		schedule.responseType = 'json';
+		schedule.send();
 		
-		var goalsleft725 = 725 - (obj.goals + careergoals);
-		document.getElementById("725goalsleft").innerHTML = goalsleft725;
-		var gamesleft725 = goalsleft725 / (obj.evgpg + obj.ppgpg);
-		document.getElementById("725gamesleft").innerHTML = Math.ceil(gamesleft725);
-		
-		//Goals Leaderboard
-		var goalsleaderboard = [];
-		for (const a in maindata) {
-			if (maindata[a]["Type"].startsWith("Goals")) {
-				goalsleaderboard.push(maindata[a]["Player"]);
+		schedule.onload = function() {
+			var xhrschedule = schedule.response;
+			//Round Number Milestones
+			var goalsleft675 = 675 - (obj.goals + careergoals);
+			document.getElementById("675goalsleft").innerHTML = goalsleft675;
+			var gamesleft675 = Math.ceil(goalsleft675 / (obj.evgpg + obj.ppgpg));
+			document.getElementById("675gamesleft").innerHTML = gamesleft675;
+			if (gamesleft675 < gamestoplay - obj.games) {
+				if (xhrschedule[obj.games + gamesleft675 - 1]["Venue"] === "home") {
+					document.getElementById("675hitdate").innerHTML = xhrschedule[obj.games + gamesleft675 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft675 - 1]["Nickname"];
+				} else {
+					document.getElementById("675hitdate").innerHTML = xhrschedule[obj.games + gamesleft675 - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft675 - 1]["Nickname"];
+				}
+			} else if (gamesleft675 > gamestoplay - obj.games && gamesleft675 < gamestoplay - obj.games + 40) {
+				document.getElementById("675hitdate").innerHTML = "Likely next season";
+			} else if (gamesleft675 > gamestoplay - obj.games + 40) {
+				document.getElementById("675hitdate").innerHTML = "Unable to project";
 			}
-		}
-		for (i = 0; i < goalsleaderboard.length; i++) {
-			var goalsleft = maindata[i]["Total"] - (obj.goals + careergoals);
-			document.getElementById(maindata[i]["Player"] + "goalsleft").innerHTML = goalsleft;
-			var gamesleft = goalsleft / (obj.evgpg + obj.ppgpg);
-			document.getElementById(maindata[i]["Player"] + "gamesleft").innerHTML = Math.ceil(gamesleft);
-		}
-		
-		//PPGs Leaderboard
-		var ppgoalsleaderboard = [];
-		for (const b in maindata) {
-			if (maindata[b]["Type"].startsWith("PP")) {
-				ppgoalsleaderboard.push(maindata[b]["Player"]);
+
+			var goalsleft700 = 700 - (obj.goals + careergoals);
+			document.getElementById("700goalsleft").innerHTML = goalsleft700;
+			var gamesleft700 = Math.ceil(goalsleft700 / (obj.evgpg + obj.ppgpg));
+			document.getElementById("700gamesleft").innerHTML = gamesleft700;
+			if (gamesleft700 < gamestoplay - obj.games) {
+				if (xhrschedule[obj.games + gamesleft700 - 1]["Venue"] === "home") {
+					document.getElementById("700hitdate").innerHTML = xhrschedule[obj.games + gamesleft700 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft700 - 1]["Nickname"];
+				} else {
+					document.getElementById("700hitdate").innerHTML = xhrschedule[obj.games + gamesleft700 - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft700 - 1]["Nickname"];
+				}
+			} else if (gamesleft700 > gamestoplay - obj.games && gamesleft700 < gamestoplay - obj.games + 40) {
+				document.getElementById("700hitdate").innerHTML = "Likely next season";
+			} else if (gamesleft700 > gamestoplay - obj.games + 40) {
+				document.getElementById("700hitdate").innerHTML = "Unable to project";
 			}
-		}
-		for (p = goalsleaderboard.length; p < goalsleaderboard.length+ppgoalsleaderboard.length; p++) {
-			var ppgoalsleft = maindata[p]["Total"] - (obj.ppgoals + careerppgoals);
-			document.getElementById(maindata[p]["Player"] + "ppgoalsleft").innerHTML = ppgoalsleft;
-			var ppgamesleft = ppgoalsleft / obj.ppgpg;
-			document.getElementById(maindata[p]["Player"] + "ppgamesleft").innerHTML = Math.ceil(ppgamesleft);
+
+			var goalsleft725 = 725 - (obj.goals + careergoals);
+			document.getElementById("725goalsleft").innerHTML = goalsleft725;
+			var gamesleft725 = Math.ceil(goalsleft725 / (obj.evgpg + obj.ppgpg));
+			document.getElementById("725gamesleft").innerHTML = gamesleft725;
+			if (gamesleft725 < gamestoplay - obj.games) {
+				if (xhrschedule[obj.games + gamesleft725 - 1]["Venue"] === "home") {
+					document.getElementById("725hitdate").innerHTML = xhrschedule[obj.games + gamesleft725 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft725 - 1]["Nickname"];
+				} else {
+					document.getElementById("725hitdate").innerHTML = xhrschedule[obj.games + gamesleft725 - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft725 - 1]["Nickname"];
+				}
+			} else if (gamesleft725 > gamestoplay - obj.games && gamesleft725 < gamestoplay - obj.games + 40) {
+				document.getElementById("725hitdate").innerHTML = "Likely next season";
+			} else if (gamesleft725 > gamestoplay - obj.games + 40) {
+				document.getElementById("725hitdate").innerHTML = "Unable to project";
+			}
+
+			//Goals Leaderboard
+			var goalsleaderboard = [];
+			for (const a in maindata) {
+				if (maindata[a]["Type"].startsWith("Goals")) {
+					goalsleaderboard.push(maindata[a]["Player"]);
+				}
+			}
+			for (i = 0; i < goalsleaderboard.length; i++) {
+				var goalsleft = maindata[i]["Total"] - (obj.goals + careergoals);
+				document.getElementById(maindata[i]["Player"] + "goalsleft").innerHTML = goalsleft;
+				var gamesleft = Math.ceil(goalsleft / (obj.evgpg + obj.ppgpg));
+				document.getElementById(maindata[i]["Player"] + "gamesleft").innerHTML = gamesleft;
+				if (gamesleft < gamestoplay - obj.games) {
+					if (xhrschedule[obj.games + gamesleft - 1]["Venue"] === "home") {
+						document.getElementById(maindata[i]["Player"] + "hitdate").innerHTML = xhrschedule[obj.games + gamesleft - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft - 1]["Nickname"];
+					} else {
+						document.getElementById(maindata[i]["Player"] + "hitdate").innerHTML = xhrschedule[obj.games + gamesleft - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft - 1]["Nickname"];
+					}
+				} else if (gamesleft > gamestoplay - obj.games && gamesleft < gamestoplay - obj.games + 40) {
+					document.getElementById(maindata[i]["Player"] + "hitdate").innerHTML = "Likely next season";
+				} else if (gamesleft > gamestoplay - obj.games + 40) {
+					document.getElementById(maindata[i]["Player"] + "hitdate").innerHTML = "Unable to project";
+				}
+			}
+
+			//PPGs Leaderboard
+			var ppgoalsleaderboard = [];
+			for (const b in maindata) {
+				if (maindata[b]["Type"].startsWith("PP")) {
+					ppgoalsleaderboard.push(maindata[b]["Player"]);
+				}
+			}
+			for (p = goalsleaderboard.length; p < goalsleaderboard.length+ppgoalsleaderboard.length; p++) {
+				var ppgoalsleft = maindata[p]["Total"] - (obj.ppgoals + careerppgoals);
+				document.getElementById(maindata[p]["Player"] + "ppgoalsleft").innerHTML = ppgoalsleft;
+				var ppgamesleft = Math.ceil(ppgoalsleft / obj.ppgpg);
+				document.getElementById(maindata[p]["Player"] + "ppgamesleft").innerHTML = ppgamesleft;
+				if (ppgamesleft < gamestoplay - obj.games) {
+					if (xhrschedule[obj.games + ppgamesleft - 1]["Venue"] === "home") {
+						document.getElementById(maindata[p]["Player"] + "pphitdate").innerHTML = xhrschedule[obj.games + ppgamesleft - 1]["Date"] + " vs " + xhrschedule[obj.games + ppgamesleft - 1]["Nickname"];
+					} else {
+						document.getElementById(maindata[p]["Player"] + "pphitdate").innerHTML = xhrschedule[obj.games + ppgamesleft - 1]["Date"] + " @ " + xhrschedule[obj.games + ppgamesleft - 1]["Nickname"];
+					}
+				} else if (ppgamesleft > gamestoplay - obj.games && ppgamesleft < gamestoplay - obj.games + 40) {
+					document.getElementById(maindata[p]["Player"] + "pphitdate").innerHTML = "Likely next season";
+				} else if (ppgamesleft > gamestoplay - obj.games + 40) {
+					document.getElementById(maindata[p]["Player"] + "pphitdate").innerHTML = "Unable to project";
+				}
+			}
 		}
 	}
 }
