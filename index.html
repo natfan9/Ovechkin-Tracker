@@ -20,6 +20,10 @@
 		<div class="page">
 			<!--<h1>The Projechkin</h1>-->
 		<div class="tabcontent" id="projection">
+			<div class="right">
+				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics
+			</div>
+			<div class="table">
 			<table>
 				<tr>
 					<th colspan="2">Season Completed</th>
@@ -40,30 +44,30 @@
 					<th colspan="2">Even Strength</th>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Shots/60</td>
+					<td class="label inputstats">Shots per 60</td>
 					<td class="number inputstats" id="evshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Time On Ice</td>
+					<td class="label inputstats">Time On Ice</td>
 					<td class="number inputstats" id="evtoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Shooting %</td>
+					<td class="label inputstats">Shooting Percentage</td>
 					<td class="number inputstats" id="evpct">0</td>
 				</tr>
 				<tr>
 					<th colspan="2">Power Play</th>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Shots/60</td>
+					<td class="label inputstats">Shots per 60</td>
 					<td class="number inputstats" id="ppshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Time On Ice</td>
+					<td class="label inputstats">Time On Ice</td>
 					<td class="number inputstats" id="pptoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Weighted Shooting %</td>
+					<td class="label inputstats">Shooting Percentage</td>
 					<td class="number inputstats" id="pppct">0</td>
 				</tr>
 				<tr>
@@ -86,6 +90,7 @@
 					<td class="number outputstats" id="careergoalsproj"><b>0</b></td>
 				</tr>
 			</table>
+			</div>
 		</div>
 		<div class="tabcontent" id="milestone">
 			<table>
@@ -220,6 +225,7 @@
 				<li><b>v1.1:</b> Added color and different tabs for Projection and Update Log <i>(11/15/19)</i></li>
 				<li><b>v2.0:</b> Added milestone tracker based on listed projections <i>(11/16/19)</i></li>
 				<li><b>v2.1:</b> Added projected game that milestones are reached to milestone page <i>(11/18/19)</i></li>
+				<li><b>v3.0:</b> Allow users to toggle off and on levels of detail on projection <i>(11/19/19)</i></li>
 			</ul>
 			<h3>Currently In Development</h3>
 			<ul>
@@ -228,7 +234,6 @@
 			<h3>Future Plans</h3>
 			<ul>
 				<li>Auto update data from NHL instead of manually updating</li>
-				<li>Allow users to toggle off and on levels of detail on projection</li>
 			</ul>
 			<h3>Longer Term Plans</h3>
 			<ul>

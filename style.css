@@ -116,3 +116,14 @@ h1,h2,h3 {
 h1,p {
 	margin-top: 5px;
 }
+
+/*div.table {
+	float: left;
+}*/
+
+div.right {
+	position: relative;
+	/*left: 300px;*/
+	float: right;
+	width: 500px;
+}

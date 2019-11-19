@@ -14,11 +14,13 @@ function openPage(pageName, elmnt) {
   // Show the specific tab content
   document.getElementById(pageName).style.display = "block";
 }
+
 window.onload = function(){
+	//document.getElementById("weightedpure").click();
 	document.getElementById("default").click();
 }
 
-function projectionFunction(neededOutputs) {
+function weightedSituational(neededOutputs) {
 	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
 	var request = new XMLHttpRequest();
 	request.open('GET', originaldata);
@@ -173,7 +175,90 @@ function projectionFunction(neededOutputs) {
 	}
 }
 
-projectionFunction(milestoneFunction);
+function pureSituational(neededOutputs) {
+	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+		
+		var games = seasonGames(maindata);
+		document.getElementById("compgames").innerHTML = games;
+		var goals = seasonGoals(maindata);
+		document.getElementById("compgoals").innerHTML = goals;
+		var newcareergoals = careergoals + goals;
+		document.getElementById("careergoals").innerHTML = newcareergoals;
+
+		//Even Strength Shots
+		var evshots = evShotsPer60(maindata);
+		document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+
+		//Even Strength Time on Ice Display
+		var evdisplaytoi = evDisplayTOI82(maindata);
+		document.getElementById("evtoi").innerHTML = evdisplaytoi;
+
+		//Eve Strength Time on Ice Calculation
+		var evtoi = evTOI(maindata);
+		
+		//Even Strength Shooting Percentage
+		var evpct = evShootPct(maindata);
+		
+		var evdisplaypct = evpct * 100;
+		document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
+
+		//Power Play Shots
+		var ppshots = ppShotsPer60(maindata);
+		document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
+
+		//Power Play Time on Ice Display
+		var ppdisplaytoi = ppDisplayTOI82(maindata);
+		document.getElementById("pptoi").innerHTML = ppdisplaytoi;
+
+		//Power Play Time on Ice Calculation
+		var pptoi = ppTOI(maindata);
+		
+		//Power Play Shooting Percentage
+		var pppct = ppShootPct(maindata);
+		
+		var ppdisplaypct = pppct * 100;
+		document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
+
+		var evgpg = evshots * evtoi * evpct;
+		var ppgpg = ppshots * pptoi * pppct;
+
+		var evgoals = seasonEVGoals(maindata);
+		var ppgoals = seasonPPGoals(maindata);
+
+		var evgoalsrem = evgpg * (gamestoplay - games);
+		var ppgoalsrem = ppgpg * (gamestoplay - games);
+
+		var projevgoals = evgoals + evgoalsrem;
+		document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4);
+		var projppgoals = ppgoals + ppgoalsrem;
+		document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
+		var projtotalgoals = projevgoals + projppgoals;
+		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+		var projcareergoals = careergoals + projtotalgoals;
+		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
+	}
+}
+
+function checkboxFunction() {
+  var checkBox = document.getElementById("weightedpure");
+
+  if (checkBox.checked == true){
+    weightedSituational(milestoneFunction);
+  } else {
+    pureSituational(milestoneFunction);
+  }
+}
+
+weightedSituational(milestoneFunction);
 
 function milestoneFunction(obj) {
 	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/milestones.json";
@@ -340,7 +425,7 @@ function evShotsPer60(jsonObj) {
 	var avg = avgshots/avgtimehour;
 	return avg;
 }
-/**
+
 function evDisplayTOI82(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
@@ -366,7 +451,7 @@ function evDisplayTOI82(jsonObj) {
 		return minutes + ":" + seconds;
 	}
 }
-**/
+
 function evTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
@@ -443,8 +528,8 @@ function ppShotsPer60(jsonObj) {
 	var avg = avgshots/avgtimehour;
 	return avg;
 }
-/**
-function ppDisplayTOI(jsonObj) {
+
+function ppDisplayTOI82(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["PP TOI"]);
@@ -469,7 +554,7 @@ function ppDisplayTOI(jsonObj) {
 		return minutes + ":" + seconds;
 	}
 }
-**/
+
 function ppTOI(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
