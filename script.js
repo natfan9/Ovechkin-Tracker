@@ -279,22 +279,6 @@ function milestoneFunction(obj) {
 		schedule.onload = function() {
 			var xhrschedule = schedule.response;
 			//Round Number Milestones
-			var goalsleft675 = 675 - (obj.goals + careergoals);
-			document.getElementById("675goalsleft").innerHTML = goalsleft675;
-			var gamesleft675 = Math.ceil(goalsleft675 / (obj.evgpg + obj.ppgpg));
-			document.getElementById("675gamesleft").innerHTML = gamesleft675;
-			if (gamesleft675 < gamestoplay - obj.games) {
-				if (xhrschedule[obj.games + gamesleft675 - 1]["Venue"] === "home") {
-					document.getElementById("675hitdate").innerHTML = xhrschedule[obj.games + gamesleft675 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft675 - 1]["Nickname"];
-				} else {
-					document.getElementById("675hitdate").innerHTML = xhrschedule[obj.games + gamesleft675 - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft675 - 1]["Nickname"];
-				}
-			} else if (gamesleft675 > gamestoplay - obj.games && gamesleft675 < gamestoplay - obj.games + 40) {
-				document.getElementById("675hitdate").innerHTML = "Likely next season";
-			} else if (gamesleft675 > gamestoplay - obj.games + 40) {
-				document.getElementById("675hitdate").innerHTML = "Unable to project";
-			}
-
 			var goalsleft700 = 700 - (obj.goals + careergoals);
 			document.getElementById("700goalsleft").innerHTML = goalsleft700;
 			var gamesleft700 = Math.ceil(goalsleft700 / (obj.evgpg + obj.ppgpg));
@@ -325,6 +309,22 @@ function milestoneFunction(obj) {
 				document.getElementById("725hitdate").innerHTML = "Likely next season";
 			} else if (gamesleft725 > gamestoplay - obj.games + 40) {
 				document.getElementById("725hitdate").innerHTML = "Unable to project";
+			}
+
+			var goalsleft750 = 750 - (obj.goals + careergoals);
+			document.getElementById("750goalsleft").innerHTML = goalsleft750;
+			var gamesleft750 = Math.ceil(goalsleft750 / (obj.evgpg + obj.ppgpg));
+			document.getElementById("750gamesleft").innerHTML = gamesleft750;
+			if (gamesleft750 < gamestoplay - obj.games) {
+				if (xhrschedule[obj.games + gamesleft750 - 1]["Venue"] === "home") {
+					document.getElementById("750hitdate").innerHTML = xhrschedule[obj.games + gamesleft750 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft750 - 1]["Nickname"];
+				} else {
+					document.getElementById("750hitdate").innerHTML = xhrschedule[obj.games + gamesleft750 - 1]["Date"] + " @ " + xhrschedule[obj.games + gamesleft750 - 1]["Nickname"];
+				}
+			} else if (gamesleft750 > gamestoplay - obj.games && gamesleft750 < gamestoplay - obj.games + 40) {
+				document.getElementById("750hitdate").innerHTML = "Likely next season";
+			} else if (gamesleft750 > gamestoplay - obj.games + 40) {
+				document.getElementById("750hitdate").innerHTML = "Unable to project";
 			}
 
 			//Goals Leaderboard
