@@ -20,7 +20,7 @@ window.onload = function(){
 	document.getElementById("default").click();
 }
 
-function weightedSituational(neededOutputs) {
+function weightedShots(neededOutputs) {
 	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
 	var request = new XMLHttpRequest();
 	request.open('GET', originaldata);
@@ -170,12 +170,19 @@ function weightedSituational(neededOutputs) {
 		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
 		var projcareergoals = careergoals + projtotalgoals;
 		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
-
+		
+		document.getElementById("evshotslabel").innerHTML = "Weighted Shots/60";
+		document.getElementById("evtoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "Weighted Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "Weighted Shots/60";
+		document.getElementById("pptoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "Weighted Shooting %";
+		
 		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
 	}
 }
 
-function pureSituational(neededOutputs) {
+function pureShots(neededOutputs) {
 	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
 	var request = new XMLHttpRequest();
 	request.open('GET', originaldata);
@@ -243,22 +250,54 @@ function pureSituational(neededOutputs) {
 		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
 		var projcareergoals = careergoals + projtotalgoals;
 		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+		
+		document.getElementById("evshotslabel").innerHTML = "20 Game Shots/60";
+		document.getElementById("evtoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "3 Year Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "20 Game Shots/60";
+		document.getElementById("pptoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "3 Year Shooting %";
 
 		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
 	}
 }
 
 function checkboxFunction() {
-  var checkBox = document.getElementById("weightedpure");
+	var checkBox = document.getElementById("weightedpure");
+	var shots = document.getElementById("shotsbutton");
+	var fenwick = document.getElementById("fenwickbutton");
+	var corsi = document.getElementById("corsibutton");
 
-  if (checkBox.checked == true){
-    weightedSituational(milestoneFunction);
-  } else {
-    pureSituational(milestoneFunction);
-  }
+	/*if (checkBox.checked == true){
+		if (shots.checked == true){
+			weightedShots(milestoneFunction);
+		} else if (fenwick.checked == true){
+			console.log("Weighted Fenwick");
+		} else if (corsi.checked == true){
+			console.log("Weighted Corsi");
+		} else {
+			weightedShots(milestoneFunction);
+		}
+	} else {
+		if (shots.checked == true){
+			pureShots(milestoneFunction);
+		} else if (fenwick.checked == true){
+			console.log("Pure Fenwick");
+		} else if (corsi.checked == true){
+			console.log("Pure Corsi");
+		} else {
+			pureShots(milestoneFunction);
+		}
+	}*/
+	
+	if (checkBox.checked == true){
+		weightedShots(milestoneFunction);
+	} else {
+		pureShots(milestoneFunction);
+	}
 }
 
-weightedSituational(milestoneFunction);
+weightedShots(milestoneFunction);
 
 function milestoneFunction(obj) {
 	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/milestones.json";
@@ -426,6 +465,66 @@ function evShotsPer60(jsonObj) {
 	return avg;
 }
 
+function evFenwickPer60(jsonObj) {
+	var totalevshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		totalevshots.push(jsonObj[shots]["EV Fenwick"]);
+	}
+	for (const time in jsonObj) {
+		totaltime.push(jsonObj[time]["EV TOI"]);
+	}
+	
+	var period = 20;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var timesum = 0;
+	for (var b = 0; b < period; b++) {
+    	timesum += totaltime[totaltime.length-period+b];
+	}
+	var avgtime = timesum/period;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function evCorsiPer60(jsonObj) {
+	var totalevshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		totalevshots.push(jsonObj[shots]["EV Corsi"]);
+	}
+	for (const time in jsonObj) {
+		totaltime.push(jsonObj[time]["EV TOI"]);
+	}
+	
+	var period = 20;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var timesum = 0;
+	for (var b = 0; b < period; b++) {
+    	timesum += totaltime[totaltime.length-period+b];
+	}
+	var avgtime = timesum/period;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
 function evDisplayTOI82(jsonObj) {
 	var totaltime = [];
 	for (const time in jsonObj) {
@@ -499,11 +598,127 @@ function evShootPct(jsonObj) {
 	return avg;
 }
 
+function evFenwickPct(jsonObj) {
+	var totalevshots = [];
+	var totalevgoals = [];
+	for (const shots in jsonObj) {
+		totalevshots.push(jsonObj[shots]["EV Fenwick"]);
+	}
+	for (const goals in jsonObj) {
+		totalevgoals.push(jsonObj[goals]["EV Goals"]);
+	}
+
+	var period = 246;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var goalssum = 0;
+	for (var b = 0; b < period; b++) {
+    	goalssum += totalevgoals[totalevgoals.length-period+b];
+	}
+	var avggoals = goalssum/period;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
+function evCorsiPct(jsonObj) {
+	var totalevshots = [];
+	var totalevgoals = [];
+	for (const shots in jsonObj) {
+		totalevshots.push(jsonObj[shots]["EV Corsi"]);
+	}
+	for (const goals in jsonObj) {
+		totalevgoals.push(jsonObj[goals]["EV Goals"]);
+	}
+
+	var period = 246;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalevshots[totalevshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var goalssum = 0;
+	for (var b = 0; b < period; b++) {
+    	goalssum += totalevgoals[totalevgoals.length-period+b];
+	}
+	var avggoals = goalssum/period;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
 function ppShotsPer60(jsonObj) {
 	var totalppshots = [];
 	var totaltime = [];
 	for (const shots in jsonObj) {
 		totalppshots.push(jsonObj[shots]["PP Shots"]);
+	}
+	for (const time in jsonObj) {
+		totaltime.push(jsonObj[time]["PP TOI"]);
+	}
+
+	var period = 20;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalppshots[totalppshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var timesum = 0;
+	for (var b = 0; b < period; b++) {
+    	timesum += totaltime[totaltime.length-period+b];
+	}
+	var avgtime = timesum/period;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function ppFenwickPer60(jsonObj) {
+	var totalppshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		totalppshots.push(jsonObj[shots]["PP Fenwick"]);
+	}
+	for (const time in jsonObj) {
+		totaltime.push(jsonObj[time]["PP TOI"]);
+	}
+
+	var period = 20;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalppshots[totalppshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var timesum = 0;
+	for (var b = 0; b < period; b++) {
+    	timesum += totaltime[totaltime.length-period+b];
+	}
+	var avgtime = timesum/period;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function ppCorsiPer60(jsonObj) {
+	var totalppshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		totalppshots.push(jsonObj[shots]["PP Corsi"]);
 	}
 	for (const time in jsonObj) {
 		totaltime.push(jsonObj[time]["PP TOI"]);
@@ -602,12 +817,132 @@ function ppShootPct(jsonObj) {
 	return avg;
 }
 
+function ppFenwickPct(jsonObj) {
+	var totalppshots = [];
+	var totalppgoals = [];
+	for (const shots in jsonObj) {
+		totalppshots.push(jsonObj[shots]["PP Fenwick"]);
+	}
+	for (const goals in jsonObj) {
+		totalppgoals.push(jsonObj[goals]["PP Goals"]);
+	}
+
+	var period = 246;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalppshots[totalppshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var goalssum = 0;
+	for (var b = 0; b < period; b++) {
+    	goalssum += totalppgoals[totalppgoals.length-period+b];
+	}
+	var avggoals = goalssum/period;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
+function ppCorsiPct(jsonObj) {
+	var totalppshots = [];
+	var totalppgoals = [];
+	for (const shots in jsonObj) {
+		totalppshots.push(jsonObj[shots]["PP Corsi"]);
+	}
+	for (const goals in jsonObj) {
+		totalppgoals.push(jsonObj[goals]["PP Goals"]);
+	}
+
+	var period = 246;
+	
+	var shotssum = 0;
+	for (var a = 0; a < period; a++) {
+    	shotssum += totalppshots[totalppshots.length-period+a];
+	}
+	var avgshots = shotssum/period;
+	
+	var goalssum = 0;
+	for (var b = 0; b < period; b++) {
+    	goalssum += totalppgoals[totalppgoals.length-period+b];
+	}
+	var avggoals = goalssum/period;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
 function seasonEVShotsPer60(jsonObj) {
 	var totalevshots = [];
 	var totaltime = [];
 	for (const shots in jsonObj) {
 		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
 			totalevshots.push(jsonObj[shots]["EV Shots"]);
+		}
+	}
+	for (const time in jsonObj) {
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["EV TOI"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalevshots.length; a++) {
+    	shotssum += totalevshots[a];
+	}
+	var avgshots = shotssum/totalevshots.length;
+	
+	var timesum = 0;
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
+	}
+	var avgtime = timesum/totaltime.length;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function seasonEVFenwickPer60(jsonObj) {
+	var totalevshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalevshots.push(jsonObj[shots]["EV Fenwick"]);
+		}
+	}
+	for (const time in jsonObj) {
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["EV TOI"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalevshots.length; a++) {
+    	shotssum += totalevshots[a];
+	}
+	var avgshots = shotssum/totalevshots.length;
+	
+	var timesum = 0;
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
+	}
+	var avgtime = timesum/totaltime.length;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function seasonEVCorsiPer60(jsonObj) {
+	var totalevshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalevshots.push(jsonObj[shots]["EV Corsi"]);
 		}
 	}
 	for (const time in jsonObj) {
@@ -709,12 +1044,136 @@ function seasonEVShootPct(jsonObj) {
 	return avg;
 }
 
+function seasonEVFenwickPct(jsonObj) {
+	var totalevshots = [];
+	var totalevgoals = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalevshots.push(jsonObj[shots]["EV Fenwick"]);
+		}
+	}
+	for (const goals in jsonObj) {
+		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
+			totalevgoals.push(jsonObj[goals]["EV Goals"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalevshots.length; a++) {
+    	shotssum += totalevshots[a];
+	}
+	var avgshots = shotssum/totalevshots.length;
+	
+	var goalssum = 0;
+	for (var b = 0; b < totalevgoals.length; b++) {
+    	goalssum += totalevgoals[b];
+	}
+	var avggoals = goalssum/totalevgoals.length;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
+function seasonEVCorsiPct(jsonObj) {
+	var totalevshots = [];
+	var totalevgoals = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalevshots.push(jsonObj[shots]["EV Corsi"]);
+		}
+	}
+	for (const goals in jsonObj) {
+		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
+			totalevgoals.push(jsonObj[goals]["EV Goals"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalevshots.length; a++) {
+    	shotssum += totalevshots[a];
+	}
+	var avgshots = shotssum/totalevshots.length;
+	
+	var goalssum = 0;
+	for (var b = 0; b < totalevgoals.length; b++) {
+    	goalssum += totalevgoals[b];
+	}
+	var avggoals = goalssum/totalevgoals.length;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
 function seasonPPShotsPer60(jsonObj) {
 	var totalppshots = [];
 	var totaltime = [];
 	for (const shots in jsonObj) {
 		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
 			totalppshots.push(jsonObj[shots]["PP Shots"]);
+		}
+	}
+	for (const time in jsonObj) {
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["PP TOI"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalppshots.length; a++) {
+    	shotssum += totalppshots[a];
+	}
+	var avgshots = shotssum/totalppshots.length;
+	
+	var timesum = 0;
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
+	}
+	var avgtime = timesum/totaltime.length;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function seasonPPFenwickPer60(jsonObj) {
+	var totalppshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalppshots.push(jsonObj[shots]["PP Fenwick"]);
+		}
+	}
+	for (const time in jsonObj) {
+		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
+			totaltime.push(jsonObj[time]["PP TOI"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalppshots.length; a++) {
+    	shotssum += totalppshots[a];
+	}
+	var avgshots = shotssum/totalppshots.length;
+	
+	var timesum = 0;
+	for (var b = 0; b < totaltime.length; b++) {
+    	timesum += totaltime[b];
+	}
+	var avgtime = timesum/totaltime.length;
+	
+	var avgtimehour = avgtime/60/60;
+	
+	var avg = avgshots/avgtimehour;
+	return avg;
+}
+
+function seasonPPCorsiPer60(jsonObj) {
+	var totalppshots = [];
+	var totaltime = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalppshots.push(jsonObj[shots]["PP Corsi"]);
 		}
 	}
 	for (const time in jsonObj) {
@@ -792,6 +1251,66 @@ function seasonPPShootPct(jsonObj) {
 	for (const shots in jsonObj) {
 		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
 			totalppshots.push(jsonObj[shots]["PP Shots"]);
+		}
+	}
+	for (const goals in jsonObj) {
+		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
+			totalppgoals.push(jsonObj[goals]["PP Goals"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalppshots.length; a++) {
+    	shotssum += totalppshots[a];
+	}
+	var avgshots = shotssum/totalppshots.length;
+	
+	var goalssum = 0;
+	for (var b = 0; b < totalppgoals.length; b++) {
+    	goalssum += totalppgoals[b];
+	}
+	var avggoals = goalssum/totalppgoals.length;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
+function seasonPPFenwickPct(jsonObj) {
+	var totalppshots = [];
+	var totalppgoals = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalppshots.push(jsonObj[shots]["PP Fenwick"]);
+		}
+	}
+	for (const goals in jsonObj) {
+		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
+			totalppgoals.push(jsonObj[goals]["PP Goals"]);
+		}
+	}
+	
+	var shotssum = 0;
+	for (var a = 0; a < totalppshots.length; a++) {
+    	shotssum += totalppshots[a];
+	}
+	var avgshots = shotssum/totalppshots.length;
+	
+	var goalssum = 0;
+	for (var b = 0; b < totalppgoals.length; b++) {
+    	goalssum += totalppgoals[b];
+	}
+	var avggoals = goalssum/totalppgoals.length;
+		
+	var avg = avggoals/avgshots;
+	return avg;
+}
+
+function seasonPPCorsiPct(jsonObj) {
+	var totalppshots = [];
+	var totalppgoals = [];
+	for (const shots in jsonObj) {
+		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
+			totalppshots.push(jsonObj[shots]["PP Corsi"]);
 		}
 	}
 	for (const goals in jsonObj) {

@@ -21,7 +21,10 @@
 			<!--<h1>The Projechkin</h1>-->
 		<div class="tabcontent" id="projection">
 			<div class="right">
-				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics
+				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics<br>
+				<!--<input type="radio" value="shots" name="group2" id="shotsbutton"><br>
+				<input type="radio" value="fenwick" name="group2" id="fenwickbutton"><br>
+				<input type="radio" value="corsi" name="group2" id="corsibutton"><br>-->
 			</div>
 			<div class="table">
 			<table>
@@ -44,30 +47,30 @@
 					<th colspan="2">Even Strength</th>
 				</tr>
 				<tr>
-					<td class="label inputstats">Shots per 60</td>
+					<td class="label inputstats" id="evshotslabel">Shots per 60</td>
 					<td class="number inputstats" id="evshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Time On Ice</td>
+					<td class="label inputstats" id="evtoilabel">Time On Ice</td>
 					<td class="number inputstats" id="evtoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Shooting Percentage</td>
+					<td class="label inputstats" id="evpctlabel">Shooting Percentage</td>
 					<td class="number inputstats" id="evpct">0</td>
 				</tr>
 				<tr>
 					<th colspan="2">Power Play</th>
 				</tr>
 				<tr>
-					<td class="label inputstats">Shots per 60</td>
+					<td class="label inputstats" id="ppshotslabel">Shots per 60</td>
 					<td class="number inputstats" id="ppshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Time On Ice</td>
+					<td class="label inputstats" id="pptoilabel">Time On Ice</td>
 					<td class="number inputstats" id="pptoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats">Shooting Percentage</td>
+					<td class="label inputstats" id="pppctlabel">Shooting Percentage</td>
 					<td class="number inputstats" id="pppct">0</td>
 				</tr>
 				<tr>
@@ -222,10 +225,10 @@
 				<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage <i>(11/10/19)</i></li>
 				<li><b>v1.0:</b> Averaged in stats from current season on a weighted basis <i>(11/10/19)</i></li>
 				<li><b>v1.0.1:</b> Added current and projected career goals to the table <i>(11/11/19)</i></li>
-				<li><b>v1.1:</b> Added color and different tabs for Projection and Update Log <i>(11/15/19)</i></li>
-				<li><b>v2.0:</b> Added milestone tracker based on listed projections <i>(11/16/19)</i></li>
-				<li><b>v2.1:</b> Added projected game that milestones are reached to milestone page <i>(11/18/19)</i></li>
-				<li><b>v3.0:</b> Allow users to toggle off and on levels of detail on projection <i>(11/19/19)</i></li>
+				<li><b>v1.0.2:</b> Added color and different tabs for Projection and Update Log <i>(11/15/19)</i></li>
+				<li><b>v1.1:</b> Added milestone tracker based on listed projections <i>(11/16/19)</i></li>
+				<li><b>v1.1.1:</b> Added projected game that milestones are reached to milestone page <i>(11/18/19)</i></li>
+				<li><b>v1.2:</b> Allow users to toggle off and on levels of detail on projection <i>(11/19/19)</i></li>
 			</ul>
 			<h3>Currently In Development</h3>
 			<ul>
