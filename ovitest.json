@@ -4930,5 +4930,23 @@
    "PP Shots": 4,
    "PP Fenwick": 4,
    "PP Corsi": 6
+ },
+ {
+   "Game": "G201930",
+   "Goals": 0,
+   "TOI": 1204,
+   "Shots": 2,
+   "Fenwick": 4,
+   "Corsi": 5,
+   "EV Goals": 0,
+   "EV TOI": 965,
+   "EV Shots": 2,
+   "EV Fenwick": 3,
+   "EV Corsi": 5,
+   "PP Goals": 0,
+   "PP TOI": 239,
+   "PP Shots": 0,
+   "PP Fenwick": 1,
+   "PP Corsi": null
  }
 ]
