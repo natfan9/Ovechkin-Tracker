@@ -9,7 +9,7 @@ today = date.today()
 now = datetime.now()
 # timezone = pytz.timezone("America/New York")
 # d_aware = timezone.localize(now)
-pacificnow = now - timedelta(days=7,hours=3)
+pacificnow = now - timedelta(days=6,hours=3)
 formattednow = pacificnow.strftime("%Y-%m-%d")
 ltrVenues = [
     "Gila River Arena",
