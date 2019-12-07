@@ -20,8 +20,9 @@ window.onload = function(){
 	document.getElementById("default").click();
 }
 
+const dataUrl = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
 function weightedShots(neededOutputs) {
-	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
+	var originaldata = dataUrl;
 	var request = new XMLHttpRequest();
 	request.open('GET', originaldata);
 	request.responseType = 'json';
@@ -183,7 +184,7 @@ function weightedShots(neededOutputs) {
 }
 
 function pureShots(neededOutputs) {
-	var originaldata = "https://natfan9.github.io/Ovechkin-Tracker/ovitest.json";
+	var originaldata = dataUrl;
 	var request = new XMLHttpRequest();
 	request.open('GET', originaldata);
 	request.responseType = 'json';
@@ -435,30 +436,40 @@ function weightedAvg(arrValues, arrWeights) {
   return result[0] / result[1];
 }
 
-function evShotsPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Shots"]);
+function avgArray(jsonObj,path,period) {
+	var bigarray = [];
+	var sum = 0;
+	for (const a in jsonObj) {
+		bigarray.push(jsonObj[a][path]);
 	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
-	}
-	
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
 	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
+    	sum += bigarray[bigarray.length-period+b];
 	}
-	var avgtime = timesum/period;
-	
+	var avg = sum/period;
+	return avg;
+}
+
+function avgSeason(jsonObj,path) {
+	var bigarray = [];
+	for (const a in jsonObj) {
+		if (jsonObj[a]["Game"].startsWith("G" + currentseason)) {
+			bigarray.push(jsonObj[a][path]);
+		}
+	}
+
+	var sum = 0;
+	for (var b = 0; b < bigarray.length; b++) {
+    	sum += bigarray[b];
+	}
+
+	var avg = sum/bigarray.length;
+	return avg;
+}
+
+function evShotsPer60(jsonObj) {	
+	var avgshots = avgArray(jsonObj,"EV Shots",20);
+	var avgtime = avgArray(jsonObj,"EV TOI",20);
+
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -466,29 +477,9 @@ function evShotsPer60(jsonObj) {
 }
 
 function evFenwickPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Fenwick"]);
-	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
-	}
-	
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
-	
+	var avgshots = avgArray(jsonObj,"EV Fenwick",20);
+	var avgtime = avgArray(jsonObj,"EV TOI",20);
+
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -496,29 +487,9 @@ function evFenwickPer60(jsonObj) {
 }
 
 function evCorsiPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Corsi"]);
-	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
-	}
-	
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
-	
+	var avgshots = avgArray(jsonObj,"EV Corsi",20);
+	var avgtime = avgArray(jsonObj,"EV TOI",20);
+
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -526,18 +497,7 @@ function evCorsiPer60(jsonObj) {
 }
 
 function evDisplayTOI82(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
-	}
-
-	var period = 82;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
+	var avgtime = avgArray(jsonObj,"EV TOI",82);
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
@@ -552,18 +512,7 @@ function evDisplayTOI82(jsonObj) {
 }
 
 function evTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["EV TOI"]);
-	}
-
-	var period = 82;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
+	var avgtime = avgArray(jsonObj,"EV TOI",82);
 	
 	avgtime = avgtime / 60 / 60;
 	
@@ -571,113 +520,33 @@ function evTOI(jsonObj) {
 }
 
 function evShootPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Shots"]);
-	}
-	for (const goals in jsonObj) {
-		totalevgoals.push(jsonObj[goals]["EV Goals"]);
-	}
-
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalevgoals[totalevgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
+	var avgshots = avgArray(jsonObj,"EV Shots",246);
+	var avggoals = avgArray(jsonObj,"EV Goals",246);
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function evFenwickPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Fenwick"]);
-	}
-	for (const goals in jsonObj) {
-		totalevgoals.push(jsonObj[goals]["EV Goals"]);
-	}
+	var avgshots = avgArray(jsonObj,"EV Fenwick",246);
+	var avggoals = avgArray(jsonObj,"EV Goals",246);
 
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalevgoals[totalevgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
-		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function evCorsiPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		totalevshots.push(jsonObj[shots]["EV Corsi"]);
-	}
-	for (const goals in jsonObj) {
-		totalevgoals.push(jsonObj[goals]["EV Goals"]);
-	}
-
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalevshots[totalevshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalevgoals[totalevgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
+	var avgshots = avgArray(jsonObj,"EV Corsi",246);
+	var avggoals = avgArray(jsonObj,"EV Goals",246);
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function ppShotsPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Shots"]);
-	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["PP TOI"]);
-	}
+	var avgshots = avgArray(jsonObj,"PP Shots",20);
+	var avgtime = avgArray(jsonObj,"PP TOI",20);
 
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
-	
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -685,29 +554,9 @@ function ppShotsPer60(jsonObj) {
 }
 
 function ppFenwickPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Fenwick"]);
-	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["PP TOI"]);
-	}
+	var avgshots = avgArray(jsonObj,"PP Fenwick",20);
+	var avgtime = avgArray(jsonObj,"PP TOI",20);
 
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
-	
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -715,29 +564,9 @@ function ppFenwickPer60(jsonObj) {
 }
 
 function ppCorsiPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Corsi"]);
-	}
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["PP TOI"]);
-	}
+	var avgshots = avgArray(jsonObj,"PP Corsi",20);
+	var avgtime = avgArray(jsonObj,"PP TOI",20);
 
-	var period = 20;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
-	
 	var avgtimehour = avgtime/60/60;
 	
 	var avg = avgshots/avgtimehour;
@@ -745,18 +574,7 @@ function ppCorsiPer60(jsonObj) {
 }
 
 function ppDisplayTOI82(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["PP TOI"]);
-	}
-
-	var period = 82;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
+	var avgtime = avgArray(jsonObj,"PP TOI",82);
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
@@ -771,18 +589,7 @@ function ppDisplayTOI82(jsonObj) {
 }
 
 function ppTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		totaltime.push(jsonObj[time]["PP TOI"]);
-	}
-
-	var period = 82;
-	
-	var timesum = 0;
-	for (var b = 0; b < period; b++) {
-    	timesum += totaltime[totaltime.length-period+b];
-	}
-	var avgtime = timesum/period;
+	var avgtime = avgArray(jsonObj,"PP TOI",82);
 	
 	avgtime = avgtime / 60 / 60;
 	
@@ -790,114 +597,32 @@ function ppTOI(jsonObj) {
 }
 
 function ppShootPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Shots"]);
-	}
-	for (const goals in jsonObj) {
-		totalppgoals.push(jsonObj[goals]["PP Goals"]);
-	}
-
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalppgoals[totalppgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
+	var avgshots = avgArray(jsonObj,"PP Shots",246);
+	var avggoals = avgArray(jsonObj,"PP Goals",246);
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function ppFenwickPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Fenwick"]);
-	}
-	for (const goals in jsonObj) {
-		totalppgoals.push(jsonObj[goals]["PP Goals"]);
-	}
-
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalppgoals[totalppgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
+	var avgshots = avgArray(jsonObj,"PP Fenwick",246);
+	var avggoals = avgArray(jsonObj,"PP Goals",246);
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function ppCorsiPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		totalppshots.push(jsonObj[shots]["PP Corsi"]);
-	}
-	for (const goals in jsonObj) {
-		totalppgoals.push(jsonObj[goals]["PP Goals"]);
-	}
-
-	var period = 246;
-	
-	var shotssum = 0;
-	for (var a = 0; a < period; a++) {
-    	shotssum += totalppshots[totalppshots.length-period+a];
-	}
-	var avgshots = shotssum/period;
-	
-	var goalssum = 0;
-	for (var b = 0; b < period; b++) {
-    	goalssum += totalppgoals[totalppgoals.length-period+b];
-	}
-	var avggoals = goalssum/period;
+	var avgshots = avgArray(jsonObj,"PP Corsi",246);
+	var avggoals = avgArray(jsonObj,"PP Goals",246);
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonEVShotsPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Shots"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["EV TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"EV Shots");
+	var avgtime = avgSeason(jsonObj,"EV TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -906,30 +631,8 @@ function seasonEVShotsPer60(jsonObj) {
 }
 
 function seasonEVFenwickPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Fenwick"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["EV TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"EV Fenwick");
+	var avgtime = avgSeason(jsonObj,"EV TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -938,30 +641,8 @@ function seasonEVFenwickPer60(jsonObj) {
 }
 
 function seasonEVCorsiPer60(jsonObj) {
-	var totalevshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Corsi"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["EV TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"EV Corsi");
+	var avgtime = avgSeason(jsonObj,"EV TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -970,18 +651,7 @@ function seasonEVCorsiPer60(jsonObj) {
 }
 /**
 function seasonEVDisplayTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["EV TOI"]);
-		}
-	}
-
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgtime = avgSeason(jsonObj,"EV TOI");
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
@@ -996,18 +666,7 @@ function seasonEVDisplayTOI(jsonObj) {
 }
 **/
 function seasonEVTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["EV TOI"]);
-		}
-	}
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgtime = avgSeason(jsonObj,"EV TOI");
 	
 	avgtime = avgtime / 60 / 60;
 	
@@ -1015,120 +674,32 @@ function seasonEVTOI(jsonObj) {
 }
 
 function seasonEVShootPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Shots"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalevgoals.push(jsonObj[goals]["EV Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalevgoals.length; b++) {
-    	goalssum += totalevgoals[b];
-	}
-	var avggoals = goalssum/totalevgoals.length;
+	var avggoals = avgSeason(jsonObj,"EV Goals");
+	var avgshots = avgSeason(jsonObj,"EV Shots");
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonEVFenwickPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Fenwick"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalevgoals.push(jsonObj[goals]["EV Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalevgoals.length; b++) {
-    	goalssum += totalevgoals[b];
-	}
-	var avggoals = goalssum/totalevgoals.length;
+	var avggoals = avgSeason(jsonObj,"EV Goals");
+	var avgshots = avgSeason(jsonObj,"EV Fenwick");
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonEVCorsiPct(jsonObj) {
-	var totalevshots = [];
-	var totalevgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalevshots.push(jsonObj[shots]["EV Corsi"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalevgoals.push(jsonObj[goals]["EV Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalevshots.length; a++) {
-    	shotssum += totalevshots[a];
-	}
-	var avgshots = shotssum/totalevshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalevgoals.length; b++) {
-    	goalssum += totalevgoals[b];
-	}
-	var avggoals = goalssum/totalevgoals.length;
+	var avggoals = avgSeason(jsonObj,"EV Goals");
+	var avgshots = avgSeason(jsonObj,"EV Corsi");
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonPPShotsPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Shots"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["PP TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"PP Shots");
+	var avgtime = avgSeason(jsonObj,"PP TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -1137,30 +708,8 @@ function seasonPPShotsPer60(jsonObj) {
 }
 
 function seasonPPFenwickPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Fenwick"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["PP TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"PP Fenwick");
+	var avgtime = avgSeason(jsonObj,"PP TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -1169,30 +718,8 @@ function seasonPPFenwickPer60(jsonObj) {
 }
 
 function seasonPPCorsiPer60(jsonObj) {
-	var totalppshots = [];
-	var totaltime = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Corsi"]);
-		}
-	}
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["PP TOI"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgshots = avgSeason(jsonObj,"PP Corsi");
+	var avgtime = avgSeason(jsonObj,"PP TOI");
 	
 	var avgtimehour = avgtime/60/60;
 	
@@ -1201,18 +728,7 @@ function seasonPPCorsiPer60(jsonObj) {
 }
 /**
 function seasonPPDisplayTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["PP TOI"]);
-		}
-	}
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgtime = avgSeason(jsonObj,"PP TOI");
 	
 	var hours = Math.floor(avgtime / 3600);
 	avgtime %= 3600;
@@ -1227,18 +743,7 @@ function seasonPPDisplayTOI(jsonObj) {
 }
 **/
 function seasonPPTOI(jsonObj) {
-	var totaltime = [];
-	for (const time in jsonObj) {
-		if (jsonObj[time]["Game"].startsWith("G" + currentseason)) {
-			totaltime.push(jsonObj[time]["PP TOI"]);
-		}
-	}
-	
-	var timesum = 0;
-	for (var b = 0; b < totaltime.length; b++) {
-    	timesum += totaltime[b];
-	}
-	var avgtime = timesum/totaltime.length;
+	var avgtime = avgSeason(jsonObj,"PP TOI");
 	
 	avgtime = avgtime / 60 / 60;
 	
@@ -1246,90 +751,24 @@ function seasonPPTOI(jsonObj) {
 }
 
 function seasonPPShootPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Shots"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalppgoals.push(jsonObj[goals]["PP Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalppgoals.length; b++) {
-    	goalssum += totalppgoals[b];
-	}
-	var avggoals = goalssum/totalppgoals.length;
+	var avggoals = avgSeason(jsonObj,"PP Goals");
+	var avgshots = avgSeason(jsonObj,"PP Shots");
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonPPFenwickPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Fenwick"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalppgoals.push(jsonObj[goals]["PP Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalppgoals.length; b++) {
-    	goalssum += totalppgoals[b];
-	}
-	var avggoals = goalssum/totalppgoals.length;
+	var avggoals = avgSeason(jsonObj,"PP Goals");
+	var avgshots = avgSeason(jsonObj,"PP Fenwick");
 		
 	var avg = avggoals/avgshots;
 	return avg;
 }
 
 function seasonPPCorsiPct(jsonObj) {
-	var totalppshots = [];
-	var totalppgoals = [];
-	for (const shots in jsonObj) {
-		if (jsonObj[shots]["Game"].startsWith("G" + currentseason)) {
-			totalppshots.push(jsonObj[shots]["PP Corsi"]);
-		}
-	}
-	for (const goals in jsonObj) {
-		if (jsonObj[goals]["Game"].startsWith("G" + currentseason)) {
-			totalppgoals.push(jsonObj[goals]["PP Goals"]);
-		}
-	}
-	
-	var shotssum = 0;
-	for (var a = 0; a < totalppshots.length; a++) {
-    	shotssum += totalppshots[a];
-	}
-	var avgshots = shotssum/totalppshots.length;
-	
-	var goalssum = 0;
-	for (var b = 0; b < totalppgoals.length; b++) {
-    	goalssum += totalppgoals[b];
-	}
-	var avggoals = goalssum/totalppgoals.length;
+	var avggoals = avgSeason(jsonObj,"PP Goals");
+	var avgshots = avgSeason(jsonObj,"PP Corsi");
 		
 	var avg = avggoals/avgshots;
 	return avg;
