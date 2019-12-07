@@ -4937,7 +4937,7 @@
    "TOI": 1204,
    "Shots": 2,
    "Fenwick": 4,
-   "Corsi": 5,
+   "Corsi": 6,
    "EV Goals": 0,
    "EV TOI": 965,
    "EV Shots": 2,
@@ -4947,6 +4947,24 @@
    "PP TOI": 239,
    "PP Shots": 0,
    "PP Fenwick": 1,
-   "PP Corsi": null
+   "PP Corsi": 1
+ },
+ {
+   "Game": "G201931",
+   "Goals": 0,
+   "TOI": 1048,
+   "Shots": 5,
+   "Fenwick": 5,
+   "Corsi": 5,
+   "EV Goals": 0,
+   "EV TOI": 910,
+   "EV Shots": 3,
+   "EV Fenwick": 3,
+   "EV Corsi": 3,
+   "PP Goals": 0,
+   "PP TOI": 138,
+   "PP Shots": 2,
+   "PP Fenwick": 2,
+   "PP Corsi": 2
  }
 ]
