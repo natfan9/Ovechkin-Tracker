@@ -323,7 +323,7 @@ function milestoneFunction(obj) {
 			document.getElementById("700goalsleft").innerHTML = goalsleft700;
 			var gamesleft700 = Math.ceil(goalsleft700 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("700gamesleft").innerHTML = gamesleft700;
-			if (gamesleft700 < gamestoplay - obj.games) {
+			if (gamesleft700 <= gamestoplay - obj.games) {
 				if (xhrschedule[obj.games + gamesleft700 - 1]["Venue"] === "home") {
 					document.getElementById("700hitdate").innerHTML = xhrschedule[obj.games + gamesleft700 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft700 - 1]["Nickname"];
 				} else {
@@ -339,7 +339,7 @@ function milestoneFunction(obj) {
 			document.getElementById("725goalsleft").innerHTML = goalsleft725;
 			var gamesleft725 = Math.ceil(goalsleft725 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("725gamesleft").innerHTML = gamesleft725;
-			if (gamesleft725 < gamestoplay - obj.games) {
+			if (gamesleft725 <= gamestoplay - obj.games) {
 				if (xhrschedule[obj.games + gamesleft725 - 1]["Venue"] === "home") {
 					document.getElementById("725hitdate").innerHTML = xhrschedule[obj.games + gamesleft725 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft725 - 1]["Nickname"];
 				} else {
@@ -355,7 +355,7 @@ function milestoneFunction(obj) {
 			document.getElementById("750goalsleft").innerHTML = goalsleft750;
 			var gamesleft750 = Math.ceil(goalsleft750 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("750gamesleft").innerHTML = gamesleft750;
-			if (gamesleft750 < gamestoplay - obj.games) {
+			if (gamesleft750 <= gamestoplay - obj.games) {
 				if (xhrschedule[obj.games + gamesleft750 - 1]["Venue"] === "home") {
 					document.getElementById("750hitdate").innerHTML = xhrschedule[obj.games + gamesleft750 - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft750 - 1]["Nickname"];
 				} else {
@@ -379,7 +379,7 @@ function milestoneFunction(obj) {
 				document.getElementById(maindata[i]["Player"] + "goalsleft").innerHTML = goalsleft;
 				var gamesleft = Math.ceil(goalsleft / (obj.evgpg + obj.ppgpg));
 				document.getElementById(maindata[i]["Player"] + "gamesleft").innerHTML = gamesleft;
-				if (gamesleft < gamestoplay - obj.games) {
+				if (gamesleft <= gamestoplay - obj.games) {
 					if (xhrschedule[obj.games + gamesleft - 1]["Venue"] === "home") {
 						document.getElementById(maindata[i]["Player"] + "hitdate").innerHTML = xhrschedule[obj.games + gamesleft - 1]["Date"] + " vs " + xhrschedule[obj.games + gamesleft - 1]["Nickname"];
 					} else {
@@ -404,7 +404,7 @@ function milestoneFunction(obj) {
 				document.getElementById(maindata[p]["Player"] + "ppgoalsleft").innerHTML = ppgoalsleft;
 				var ppgamesleft = Math.ceil(ppgoalsleft / obj.ppgpg);
 				document.getElementById(maindata[p]["Player"] + "ppgamesleft").innerHTML = ppgamesleft;
-				if (ppgamesleft < gamestoplay - obj.games) {
+				if (ppgamesleft <= gamestoplay - obj.games) {
 					if (xhrschedule[obj.games + ppgamesleft - 1]["Venue"] === "home") {
 						document.getElementById(maindata[p]["Player"] + "pphitdate").innerHTML = xhrschedule[obj.games + ppgamesleft - 1]["Date"] + " vs " + xhrschedule[obj.games + ppgamesleft - 1]["Nickname"];
 					} else {
