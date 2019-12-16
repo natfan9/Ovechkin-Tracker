@@ -183,6 +183,330 @@ function weightedShots(neededOutputs) {
 	}
 }
 
+function weightedFenwick(neededOutputs) {
+	var originaldata = dataUrl;
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+
+		var shotsweight = shotsWeight();
+		var timeweight = timeWeight();
+		var pctweight = pctWeight();
+
+		function shotsWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 20) {
+				return 100 - (games * 2);
+			} else {
+				return 60;
+			}
+		}
+
+		function timeWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 20) {
+				return 100 - (games * 4);
+			} else {
+				return 20;
+			}
+		}
+
+		function pctWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 40) {
+				return 100 - (games * 1.5);
+			} else {
+				return 40;
+			}
+		}
+
+		function evDisplayTOI() {
+			var time82games = evTOI(maindata) * 60 * 60;
+			var timeseason = seasonEVTOI(maindata) * 60 * 60;
+
+			var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+
+			var hours = Math.floor(avgtime / 3600);
+			avgtime %= 3600;
+			var minutes = Math.floor(avgtime / 60);
+			var seconds = Math.round(avgtime % 60);
+
+			if (seconds < 10) {
+				return minutes + ":0" + seconds;
+			} else {
+				return minutes + ":" + seconds;
+			}
+		}
+
+		function ppDisplayTOI() {
+			var time82games = ppTOI(maindata) * 60 * 60;
+			var timeseason = seasonPPTOI(maindata) * 60 * 60;
+
+			var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+
+			var hours = Math.floor(avgtime / 3600);
+			avgtime %= 3600;
+			var minutes = Math.floor(avgtime / 60);
+			var seconds = Math.round(avgtime % 60);
+
+			if (seconds < 10) {
+				return minutes + ":0" + seconds;
+			} else {
+				return minutes + ":" + seconds;
+			}
+		}
+
+		var games = seasonGames(maindata);
+		document.getElementById("compgames").innerHTML = games;
+		var goals = seasonGoals(maindata);
+		document.getElementById("compgoals").innerHTML = goals;
+		var newcareergoals = careergoals + goals;
+		document.getElementById("careergoals").innerHTML = newcareergoals;
+
+		//Even Strength Shots
+		var evshots20 = evFenwickPer60(maindata);
+		var evshotsseason = seasonEVFenwickPer60(maindata);
+		var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
+		document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+
+		//Even Strength Time on Ice Display
+		var evdisplaytoi = evDisplayTOI(maindata);
+		document.getElementById("evtoi").innerHTML = evdisplaytoi;
+
+		//Eve Strength Time on Ice Calculation
+		var evtoi82 = evTOI(maindata);
+		var evtoiseason = seasonEVTOI(maindata);
+		var evtoi = weightedAvg([evtoi82,evtoiseason],[timeweight,100-timeweight]);
+
+		//Even Strength Shooting Percentage
+		var evpct246 = evFenwickPct(maindata);
+		var evpctseason = seasonEVFenwickPct(maindata);
+		var evpct = weightedAvg([evpct246,evpctseason],[pctweight,100-pctweight]);
+
+		var evdisplaypct = evpct * 100;
+		document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
+
+		//Power Play Shots
+		var ppshots20 = ppFenwickPer60(maindata);
+		var ppshotsseason = seasonPPFenwickPer60(maindata);
+		var ppshots = weightedAvg([ppshots20,ppshotsseason],[shotsweight,100-shotsweight]);
+		document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
+
+		//Power Play Time on Ice Display
+		var ppdisplaytoi = ppDisplayTOI(maindata);
+		document.getElementById("pptoi").innerHTML = ppdisplaytoi;
+
+		//Power Play Time on Ice Calculation
+		var pptoi82 = ppTOI(maindata);
+		var pptoiseason = seasonPPTOI(maindata);
+		var pptoi = weightedAvg([pptoi82,pptoiseason],[timeweight,100-timeweight]);
+
+		//Power Play Shooting Percentage
+		var pppct246 = ppFenwickPct(maindata);
+		var pppctseason = seasonPPFenwickPct(maindata);
+		var pppct = weightedAvg([pppct246,pppctseason],[pctweight,100-pctweight]);
+
+		var ppdisplaypct = pppct * 100;
+		document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
+
+		var evgpg = evshots * evtoi * evpct;
+		var ppgpg = ppshots * pptoi * pppct;
+
+		var evgoals = seasonEVGoals(maindata);
+		var ppgoals = seasonPPGoals(maindata);
+
+		var evgoalsrem = evgpg * (gamestoplay - games);
+		var ppgoalsrem = ppgpg * (gamestoplay - games);
+
+		var projevgoals = evgoals + evgoalsrem;
+		document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4);
+		var projppgoals = ppgoals + ppgoalsrem;
+		document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
+		var projtotalgoals = projevgoals + projppgoals;
+		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+		var projcareergoals = careergoals + projtotalgoals;
+		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+		
+		document.getElementById("evshotslabel").innerHTML = "Weighted Fenwick/60";
+		document.getElementById("evtoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "Weighted Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "Weighted Fenwick/60";
+		document.getElementById("pptoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "Weighted Shooting %";
+		
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
+	}
+}
+
+function weightedCorsi(neededOutputs) {
+	var originaldata = dataUrl;
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+
+		var shotsweight = shotsWeight();
+		var timeweight = timeWeight();
+		var pctweight = pctWeight();
+
+		function shotsWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 20) {
+				return 100 - (games * 2);
+			} else {
+				return 60;
+			}
+		}
+
+		function timeWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 20) {
+				return 100 - (games * 4);
+			} else {
+				return 20;
+			}
+		}
+
+		function pctWeight() {
+			games = seasonGames(maindata);
+
+			if (games < 40) {
+				return 100 - (games * 1.5);
+			} else {
+				return 40;
+			}
+		}
+
+		function evDisplayTOI() {
+			var time82games = evTOI(maindata) * 60 * 60;
+			var timeseason = seasonEVTOI(maindata) * 60 * 60;
+
+			var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+
+			var hours = Math.floor(avgtime / 3600);
+			avgtime %= 3600;
+			var minutes = Math.floor(avgtime / 60);
+			var seconds = Math.round(avgtime % 60);
+
+			if (seconds < 10) {
+				return minutes + ":0" + seconds;
+			} else {
+				return minutes + ":" + seconds;
+			}
+		}
+
+		function ppDisplayTOI() {
+			var time82games = ppTOI(maindata) * 60 * 60;
+			var timeseason = seasonPPTOI(maindata) * 60 * 60;
+
+			var avgtime = weightedAvg([time82games,timeseason],[timeweight,100-timeweight]);
+
+			var hours = Math.floor(avgtime / 3600);
+			avgtime %= 3600;
+			var minutes = Math.floor(avgtime / 60);
+			var seconds = Math.round(avgtime % 60);
+
+			if (seconds < 10) {
+				return minutes + ":0" + seconds;
+			} else {
+				return minutes + ":" + seconds;
+			}
+		}
+
+		var games = seasonGames(maindata);
+		document.getElementById("compgames").innerHTML = games;
+		var goals = seasonGoals(maindata);
+		document.getElementById("compgoals").innerHTML = goals;
+		var newcareergoals = careergoals + goals;
+		document.getElementById("careergoals").innerHTML = newcareergoals;
+
+		//Even Strength Shots
+		var evshots20 = evCorsiPer60(maindata);
+		var evshotsseason = seasonEVCorsiPer60(maindata);
+		var evshots = weightedAvg([evshots20,evshotsseason],[shotsweight,100-shotsweight]);
+		document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+
+		//Even Strength Time on Ice Display
+		var evdisplaytoi = evDisplayTOI(maindata);
+		document.getElementById("evtoi").innerHTML = evdisplaytoi;
+
+		//Eve Strength Time on Ice Calculation
+		var evtoi82 = evTOI(maindata);
+		var evtoiseason = seasonEVTOI(maindata);
+		var evtoi = weightedAvg([evtoi82,evtoiseason],[timeweight,100-timeweight]);
+
+		//Even Strength Shooting Percentage
+		var evpct246 = evCorsiPct(maindata);
+		var evpctseason = seasonEVCorsiPct(maindata);
+		var evpct = weightedAvg([evpct246,evpctseason],[pctweight,100-pctweight]);
+
+		var evdisplaypct = evpct * 100;
+		document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
+
+		//Power Play Shots
+		var ppshots20 = ppCorsiPer60(maindata);
+		var ppshotsseason = seasonPPCorsiPer60(maindata);
+		var ppshots = weightedAvg([ppshots20,ppshotsseason],[shotsweight,100-shotsweight]);
+		document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
+
+		//Power Play Time on Ice Display
+		var ppdisplaytoi = ppDisplayTOI(maindata);
+		document.getElementById("pptoi").innerHTML = ppdisplaytoi;
+
+		//Power Play Time on Ice Calculation
+		var pptoi82 = ppTOI(maindata);
+		var pptoiseason = seasonPPTOI(maindata);
+		var pptoi = weightedAvg([pptoi82,pptoiseason],[timeweight,100-timeweight]);
+
+		//Power Play Shooting Percentage
+		var pppct246 = ppCorsiPct(maindata);
+		var pppctseason = seasonPPCorsiPct(maindata);
+		var pppct = weightedAvg([pppct246,pppctseason],[pctweight,100-pctweight]);
+
+		var ppdisplaypct = pppct * 100;
+		document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
+
+		var evgpg = evshots * evtoi * evpct;
+		var ppgpg = ppshots * pptoi * pppct;
+
+		var evgoals = seasonEVGoals(maindata);
+		var ppgoals = seasonPPGoals(maindata);
+
+		var evgoalsrem = evgpg * (gamestoplay - games);
+		var ppgoalsrem = ppgpg * (gamestoplay - games);
+
+		var projevgoals = evgoals + evgoalsrem;
+		document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4);
+		var projppgoals = ppgoals + ppgoalsrem;
+		document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
+		var projtotalgoals = projevgoals + projppgoals;
+		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+		var projcareergoals = careergoals + projtotalgoals;
+		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+		
+		document.getElementById("evshotslabel").innerHTML = "Weighted Corsi/60";
+		document.getElementById("evtoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "Weighted Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "Weighted Corsi/60";
+		document.getElementById("pptoilabel").innerHTML = "Weighted Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "Weighted Shooting %";
+		
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
+	}
+}
+
 function pureShots(neededOutputs) {
 	var originaldata = dataUrl;
 	var request = new XMLHttpRequest();
@@ -263,39 +587,193 @@ function pureShots(neededOutputs) {
 	}
 }
 
+function pureFenwick(neededOutputs) {
+	var originaldata = dataUrl;
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+		
+		var games = seasonGames(maindata);
+		document.getElementById("compgames").innerHTML = games;
+		var goals = seasonGoals(maindata);
+		document.getElementById("compgoals").innerHTML = goals;
+		var newcareergoals = careergoals + goals;
+		document.getElementById("careergoals").innerHTML = newcareergoals;
+
+		//Even Strength Shots
+		var evshots = evFenwickPer60(maindata);
+		document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+
+		//Even Strength Time on Ice Display
+		var evdisplaytoi = evDisplayTOI82(maindata);
+		document.getElementById("evtoi").innerHTML = evdisplaytoi;
+
+		//Eve Strength Time on Ice Calculation
+		var evtoi = evTOI(maindata);
+		
+		//Even Strength Shooting Percentage
+		var evpct = evFenwickPct(maindata);
+		
+		var evdisplaypct = evpct * 100;
+		document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
+
+		//Power Play Shots
+		var ppshots = ppFenwickPer60(maindata);
+		document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
+
+		//Power Play Time on Ice Display
+		var ppdisplaytoi = ppDisplayTOI82(maindata);
+		document.getElementById("pptoi").innerHTML = ppdisplaytoi;
+
+		//Power Play Time on Ice Calculation
+		var pptoi = ppTOI(maindata);
+		
+		//Power Play Shooting Percentage
+		var pppct = ppFenwickPct(maindata);
+		
+		var ppdisplaypct = pppct * 100;
+		document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
+
+		var evgpg = evshots * evtoi * evpct;
+		var ppgpg = ppshots * pptoi * pppct;
+
+		var evgoals = seasonEVGoals(maindata);
+		var ppgoals = seasonPPGoals(maindata);
+
+		var evgoalsrem = evgpg * (gamestoplay - games);
+		var ppgoalsrem = ppgpg * (gamestoplay - games);
+
+		var projevgoals = evgoals + evgoalsrem;
+		document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4);
+		var projppgoals = ppgoals + ppgoalsrem;
+		document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
+		var projtotalgoals = projevgoals + projppgoals;
+		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+		var projcareergoals = careergoals + projtotalgoals;
+		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+		
+		document.getElementById("evshotslabel").innerHTML = "20 Game Fenwick/60";
+		document.getElementById("evtoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "3 Year Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "20 Game Fenwick/60";
+		document.getElementById("pptoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "3 Year Shooting %";
+
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
+	}
+}
+
+function pureCorsi(neededOutputs) {
+	var originaldata = dataUrl;
+	var request = new XMLHttpRequest();
+	request.open('GET', originaldata);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		var maindata = request.response;
+		
+		var games = seasonGames(maindata);
+		document.getElementById("compgames").innerHTML = games;
+		var goals = seasonGoals(maindata);
+		document.getElementById("compgoals").innerHTML = goals;
+		var newcareergoals = careergoals + goals;
+		document.getElementById("careergoals").innerHTML = newcareergoals;
+
+		//Even Strength Shots
+		var evshots = evCorsiPer60(maindata);
+		document.getElementById("evshots").innerHTML = evshots.toPrecision(4);
+
+		//Even Strength Time on Ice Display
+		var evdisplaytoi = evDisplayTOI82(maindata);
+		document.getElementById("evtoi").innerHTML = evdisplaytoi;
+
+		//Eve Strength Time on Ice Calculation
+		var evtoi = evTOI(maindata);
+		
+		//Even Strength Shooting Percentage
+		var evpct = evCorsiPct(maindata);
+		
+		var evdisplaypct = evpct * 100;
+		document.getElementById("evpct").innerHTML = evdisplaypct.toPrecision(4) + "%";
+
+		//Power Play Shots
+		var ppshots = ppCorsiPer60(maindata);
+		document.getElementById("ppshots").innerHTML = ppshots.toPrecision(4);
+
+		//Power Play Time on Ice Display
+		var ppdisplaytoi = ppDisplayTOI82(maindata);
+		document.getElementById("pptoi").innerHTML = ppdisplaytoi;
+
+		//Power Play Time on Ice Calculation
+		var pptoi = ppTOI(maindata);
+		
+		//Power Play Shooting Percentage
+		var pppct = ppCorsiPct(maindata);
+		
+		var ppdisplaypct = pppct * 100;
+		document.getElementById("pppct").innerHTML = ppdisplaypct.toPrecision(4) + "%";
+
+		var evgpg = evshots * evtoi * evpct;
+		var ppgpg = ppshots * pptoi * pppct;
+
+		var evgoals = seasonEVGoals(maindata);
+		var ppgoals = seasonPPGoals(maindata);
+
+		var evgoalsrem = evgpg * (gamestoplay - games);
+		var ppgoalsrem = ppgpg * (gamestoplay - games);
+
+		var projevgoals = evgoals + evgoalsrem;
+		document.getElementById("evgoals").innerHTML = projevgoals.toPrecision(4);
+		var projppgoals = ppgoals + ppgoalsrem;
+		document.getElementById("ppgoals").innerHTML = projppgoals.toPrecision(4);
+		var projtotalgoals = projevgoals + projppgoals;
+		document.getElementById("totalgoals").innerHTML = projtotalgoals.toPrecision(4);
+		var projcareergoals = careergoals + projtotalgoals;
+		document.getElementById("careergoalsproj").innerHTML = projcareergoals.toPrecision(3);
+		
+		document.getElementById("evshotslabel").innerHTML = "20 Game Corsi/60";
+		document.getElementById("evtoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("evpctlabel").innerHTML = "3 Year Shooting %";
+		document.getElementById("ppshotslabel").innerHTML = "20 Game Corsi/60";
+		document.getElementById("pptoilabel").innerHTML = "82 Game Time On Ice";
+		document.getElementById("pppctlabel").innerHTML = "3 Year Shooting %";
+
+		neededOutputs({games:games,goals:goals,evgoals:evgoals,ppgoals:ppgoals,evgpg:evgpg,ppgpg:ppgpg});
+	}
+}
+
 function checkboxFunction() {
 	var checkBox = document.getElementById("weightedpure");
 	var shots = document.getElementById("shotsbutton");
 	var fenwick = document.getElementById("fenwickbutton");
 	var corsi = document.getElementById("corsibutton");
 
-	/*if (checkBox.checked == true){
-		if (shots.checked == true){
-			weightedShots(milestoneFunction);
-		} else if (fenwick.checked == true){
-			console.log("Weighted Fenwick");
-		} else if (corsi.checked == true){
-			console.log("Weighted Corsi");
-		} else {
-			weightedShots(milestoneFunction);
-		}
+	if (checkBox.checked == true && shots.checked == true) {
+		weightedShots(milestoneFunction);
+	} else if (checkBox.checked == true && fenwick.checked == true) {
+		weightedFenwick(milestoneFunction);
+	} else if (checkBox.checked == true && corsi.checked == true) {
+		weightedCorsi(milestoneFunction);
+	} else if (checkBox.checked == false && shots.checked == true) {
+		pureShots(milestoneFunction);
+	} else if (checkBox.checked == false && fenwick.checked == true) {
+		pureFenwick(milestoneFunction);
+	} else if (checkBox.checked == false && corsi.checked == true) {
+		pureCorsi(milestoneFunction);
 	} else {
-		if (shots.checked == true){
-			pureShots(milestoneFunction);
-		} else if (fenwick.checked == true){
-			console.log("Pure Fenwick");
-		} else if (corsi.checked == true){
-			console.log("Pure Corsi");
-		} else {
-			pureShots(milestoneFunction);
-		}
-	}*/
-	
+		weightedShots(milestoneFunction);
+	}
+	/*
 	if (checkBox.checked == true){
 		weightedShots(milestoneFunction);
 	} else {
 		pureShots(milestoneFunction);
-	}
+	}*/
 }
 
 weightedShots(milestoneFunction);

@@ -21,10 +21,10 @@
 			<!--<h1>The Projechkin</h1>-->
 		<div class="tabcontent" id="projection">
 			<div class="right">
-				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics<br>
-				<!--<input type="radio" value="shots" name="group2" id="shotsbutton"><br>
-				<input type="radio" value="fenwick" name="group2" id="fenwickbutton"><br>
-				<input type="radio" value="corsi" name="group2" id="corsibutton"><br>-->
+				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics <i>default</i><br>
+				<input type="radio" value="shots" name="group2" id="shotsbutton" onclick="checkboxFunction()" checked> Shot Based (Shots on Goal) <i>default</i><br>
+				<input type="radio" value="fenwick" name="group2" id="fenwickbutton" onclick="checkboxFunction()"> Fenwick Based (Unblocked Shot Attempts)<br>
+				<input type="radio" value="corsi" name="group2" id="corsibutton" onclick="checkboxFunction()"> Corsi Based (All Shot Attempts)<br>
 			</div>
 			<div class="table">
 			<table>

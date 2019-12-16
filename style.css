@@ -127,3 +127,8 @@ div.right {
 	float: right;
 	width: 500px;
 }
+
+i {
+	color: #999999;
+	font-weight: lighter;
+}
