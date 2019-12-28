@@ -1,5 +1,5 @@
 var currentseason = 2019;
-var gamestoplay = 82;
+var gamestoplay = 81;
 var careergoals = 658;
 var careerppgoals = 247;
 
