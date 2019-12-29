@@ -88,7 +88,7 @@ def parseGame(data, gameID):
     minutesslice = slice(0,2)
     secondsslice = slice(3,5)
     # print(theJSON)
-    if theJSON["gameData"]["status"]["detailedState"] == "Final": # Check to make sure the game is finished
+    if theJSON["gameData"]["status"]["abstractGameState"] == "Final": # Check to make sure the game is finished
         # Next Steps:
         # check to see if ovechkin played
         if "ID8471214" in theJSON["gameData"]["players"]:
@@ -546,7 +546,7 @@ def main():
         newgameJSON = json.loads(data)
         for i,d in enumerate(newgameJSON["dates"]):
             gameJSON = getGame(newgameJSON, i)
-            # print(gameJSON)
+            # print(gameJSON[0])
             if gameJSON != None:
                 gameUrl = urllib.request.urlopen(gameJSON[0])
                 print ("result code: " + str(gameUrl.getcode()))
