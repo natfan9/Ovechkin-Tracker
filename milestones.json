@@ -50,11 +50,6 @@
    "Total": 690
  },
  {
-   "Type": "Goals",
-   "Player": "selanne",
-   "Total": 684
- },
- {
    "Type": "PP Goals",
    "Player": "andreychuk",
    "Total": 274
@@ -63,10 +58,5 @@
    "Type": "PP Goals",
    "Player": "hull",
    "Total": 265
- },
- {
-   "Type": "PP Goals",
-   "Player": "selanne",
-   "Total": 255
  }
 ]
