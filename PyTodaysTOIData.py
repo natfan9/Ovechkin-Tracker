@@ -528,7 +528,7 @@ def main():
                     if shotinfo != {}:
                         exportdict = playSort(shotinfo,gameJSON[1])
                         print(exportdict)
-                        # finalJSON.append(exportdict)
+                        finalJSON.append(exportdict)
                 else:
                     print("Received error, cannot parse results")
     else:
