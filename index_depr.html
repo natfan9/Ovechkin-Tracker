@@ -6,11 +6,11 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<script type="text/javascript" src="script v3.js"></script>
+	<script type="text/javascript" src="script v2.js"></script>
 	<div class="container">
 		<div class="intro">
 			<h1>Alex Ovechkin Goal Projection</h1>
-			This is a simple projection system that combines recent shot rates, medium term time on ice averages and long term shooting percentages in 10 different even strength and power play situations to attempt to determine how many goals Alex Ovechkin will score in the current season. In addition to those factors, it also combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection also takes into account shot location from 23 different zones on the ice.
+			This is a simple projection system that combines recent shot rates, medium term time on ice averages and long term shooting percentages in both even strength and power play situations to attempt to determine how many goals Alex Ovechkin will score in the current season. In addition to those factors, it also combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection also takes into account shot quality based on shot location from 23 different zones on the ice.
 		</div>
 		<div class="tab">
 			<button class="tablink" onclick="openPage('projection', this)" id="default">Projection</button>
@@ -44,52 +44,36 @@
 					<td class="label">Career Goals</td>
 					<td class="number compstats" id="careergoals"><b>0</b></td>
 				</tr>
-				<!--<tr>
+				<tr>
 					<th colspan="2">Even Strength</th>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="5v5label">5-on-5 Goals</td>
-					<td class="number inputstats" id="5v5">0</td>
+					<td class="label inputstats" id="evshotslabel">Shots per 60</td>
+					<td class="number inputstats" id="evshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="6v5label">6-on-5 Goals</td>
-					<td class="number inputstats" id="6v5">0</td>
+					<td class="label inputstats" id="evtoilabel">Time On Ice</td>
+					<td class="number inputstats" id="evtoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="5v6label">5-on-6 Goals (empty net)</td>
-					<td class="number inputstats" id="5v6">0</td>
-				</tr>
-				<tr>
-					<td class="label inputstats" id="4v4label">4-on-4 Goals</td>
-					<td class="number inputstats" id="4v4">0</td>
-				</tr>
-				<tr>
-					<td class="label inputstats" id="3v3label">3-on-3 Goals</td>
-					<td class="number inputstats" id="3v3">0</td>
+					<td class="label inputstats" id="evpctlabel">Shooting Percentage</td>
+					<td class="number inputstats" id="evpct">0</td>
 				</tr>
 				<tr>
 					<th colspan="2">Power Play</th>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="5v4label">5-on-4 Goals</td>
-					<td class="number inputstats" id="5v4">0</td>
+					<td class="label inputstats" id="ppshotslabel">Shots per 60</td>
+					<td class="number inputstats" id="ppshots">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="5v3label">5-on-3 Goals</td>
-					<td class="number inputstats" id="5v3">0</td>
+					<td class="label inputstats" id="pptoilabel">Time On Ice</td>
+					<td class="number inputstats" id="pptoi">0</td>
 				</tr>
 				<tr>
-					<td class="label inputstats" id="4v3label">4-on-3 Goals</td>
-					<td class="number inputstats" id="4v3">0</td>
+					<td class="label inputstats" id="pppctlabel">Shooting Percentage</td>
+					<td class="number inputstats" id="pppct">0</td>
 				</tr>
-				<tr>
-					<td class="label inputstats" id="6v4label">6-on-4 Goals</td>
-					<td class="number inputstats" id="6v4">0</td>
-				</tr>
-				<tr>
-					<td class="label inputstats" id="6v3label">6-on-3 Goals</td>
-					<td class="number inputstats" id="6v3">0</td>
-				</tr>-->
 				<tr>
 					<th colspan="2">End of Season Projection</th>
 				</tr>
@@ -246,12 +230,11 @@
 				<li><b>v1.1:</b> Added milestone tracker based on listed projections <i>(11/16/19)</i></li>
 				<li><b>v1.1.1:</b> Added projected game that milestones are reached to milestone page <i>(11/18/19)</i></li>
 				<li><b>v1.2:</b> Allow users to toggle off and on levels of detail on projection <i>(11/19/19)</i></li>
-				<li><b>v2.0:</b> Factored in shot location within 23 different zones on the ice; streamlined data updating process; allowed for users to toggle between different factors of projection; changed default factors for the projection; adjusted timelines for recent averages to 30 games for shots, and 410 games for shooting percentage <i>(12/16/19)</i></li>
-				<li><b>v3.0:</b> Further separated situations from even strenth and power play to 6v5, 5v6, 5v5, 4v4, 3v3, 6v4, 6v3, 5v4, 5v3, and 4v3; removed visibility for factors at even strength and power play, only inputs and outputs shown <i>(1/11/20)</i></li>
+				<li><b>v2.0:</b> Factored in shot quality based on shot location within 23 different zones on the ice; streamlined data updating process; allowed for users to toggle between different factors of projection; changed default factors for the projection; adjusted timelines for recent averages to 30 games for shots, and 410 games for shooting percentage <i>(12/16/2019)</i></li>
 			</ul>
 			<h3>Currently In Development</h3>
 			<ul>
-				<li>TBD</li>
+				<li>Further separate situations from even strenth and power play to 6v5, 5v6, 5v5, 4v4, 3v3, 5v4, 5v3, and 4v3</li>
 			</ul>
 			<h3>Future Plans</h3>
 			<ul>
@@ -260,7 +243,6 @@
 			<h3>Longer Term Plans</h3>
 			<ul>
 				<li>Factor in opponent strength and statistics</li>
-				<li>Change shot location to shot danger based on <a href="https://www.naturalstattrick.com/glossary.php?teams">Natural Stat Trick</a> and <a href="http://blog.war-on-ice.com/new-defining-scoring-chances/index.html">War-On-Ice's</a> defininion of chance danger</li>
 				<li>Factor in basic on ice teammate impact</li>
 			</ul>
 		</div>
