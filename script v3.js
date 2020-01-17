@@ -664,29 +664,33 @@ function per60(jsonObj, strengthname, strengthnum, shottype, period) {
 					dz++;
 			}
 		}
-		var bglavg = bgl/avgtimehour/shotsbygame.length;
-		var z1avg = z1/avgtimehour/shotsbygame.length;
-		var z2avg = z2/avgtimehour/shotsbygame.length;
-		var z3avg = z3/avgtimehour/shotsbygame.length;
-		var z4avg = z4/avgtimehour/shotsbygame.length;
-		var z5avg = z5/avgtimehour/shotsbygame.length;
-		var z6avg = z6/avgtimehour/shotsbygame.length;
-		var z7avg = z7/avgtimehour/shotsbygame.length;
-		var z8avg = z8/avgtimehour/shotsbygame.length;
-		var z9avg = z9/avgtimehour/shotsbygame.length;
-		var z10avg = z10/avgtimehour/shotsbygame.length;
-		var z11avg = z11/avgtimehour/shotsbygame.length;
-		var z12avg = z12/avgtimehour/shotsbygame.length;
-		var z13avg = z13/avgtimehour/shotsbygame.length;
-		var z14avg = z14/avgtimehour/shotsbygame.length;
-		var z15avg = z15/avgtimehour/shotsbygame.length;
-		var z16avg = z16/avgtimehour/shotsbygame.length;
-		var z17avg = z17/avgtimehour/shotsbygame.length;
-		var z18avg = z18/avgtimehour/shotsbygame.length;
-		var z19avg = z19/avgtimehour/shotsbygame.length;
-		var z20avg = z20/avgtimehour/shotsbygame.length;
-		var nzavg = nz/avgtimehour/shotsbygame.length;
-		var dzavg = dz/avgtimehour/shotsbygame.length;
+		if (avgtimehour != 0) {
+			var bglavg = bgl/avgtimehour/shotsbygame.length;
+			var z1avg = z1/avgtimehour/shotsbygame.length;
+			var z2avg = z2/avgtimehour/shotsbygame.length;
+			var z3avg = z3/avgtimehour/shotsbygame.length;
+			var z4avg = z4/avgtimehour/shotsbygame.length;
+			var z5avg = z5/avgtimehour/shotsbygame.length;
+			var z6avg = z6/avgtimehour/shotsbygame.length;
+			var z7avg = z7/avgtimehour/shotsbygame.length;
+			var z8avg = z8/avgtimehour/shotsbygame.length;
+			var z9avg = z9/avgtimehour/shotsbygame.length;
+			var z10avg = z10/avgtimehour/shotsbygame.length;
+			var z11avg = z11/avgtimehour/shotsbygame.length;
+			var z12avg = z12/avgtimehour/shotsbygame.length;
+			var z13avg = z13/avgtimehour/shotsbygame.length;
+			var z14avg = z14/avgtimehour/shotsbygame.length;
+			var z15avg = z15/avgtimehour/shotsbygame.length;
+			var z16avg = z16/avgtimehour/shotsbygame.length;
+			var z17avg = z17/avgtimehour/shotsbygame.length;
+			var z18avg = z18/avgtimehour/shotsbygame.length;
+			var z19avg = z19/avgtimehour/shotsbygame.length;
+			var z20avg = z20/avgtimehour/shotsbygame.length;
+			var nzavg = nz/avgtimehour/shotsbygame.length;
+			var dzavg = dz/avgtimehour/shotsbygame.length;
+		} else {
+			var bglavg = 0, z1avg = 0, z2avg = 0, z3avg = 0, z4avg = 0, z5avg = 0, z6avg = 0, z7avg = 0, z8avg = 0, z8avg = 0, z9avg = 0, z10avg = 0, z11avg = 0, z12avg = 0, z13avg = 0, z14avg = 0, z15avg = 0, z16avg = 0, z17avg = 0, z18avg = 0, z19avg = 0, z20avg = 0, nzavg = 0, dzavg = 0; 
+		}
 		// var total = bglavg + z1avg + z2avg + z3avg + z4avg + z5avg + z6avg + z7avg + z8avg + z9avg + z10avg + z11avg + z12avg + z13avg + z14avg + z15avg + z16avg + z17avg + z18avg + z19avg + z20avg + nzavg + dzavg;
 		return [bglavg, z1avg, z2avg, z3avg, z4avg, z5avg, z6avg, z7avg, z8avg, z9avg, z10avg, z11avg, z12avg, z13avg, z14avg, z15avg, z16avg, z17avg, z18avg, z19avg, z20avg, nzavg, dzavg];
 	} else {
@@ -774,29 +778,33 @@ function per60(jsonObj, strengthname, strengthnum, shottype, period) {
 					dz++;
 			}
 		}
-		var bglavg = bgl/avgtimehour/period;
-		var z1avg = z1/avgtimehour/period;
-		var z2avg = z2/avgtimehour/period;
-		var z3avg = z3/avgtimehour/period;
-		var z4avg = z4/avgtimehour/period;
-		var z5avg = z5/avgtimehour/period;
-		var z6avg = z6/avgtimehour/period;
-		var z7avg = z7/avgtimehour/period;
-		var z8avg = z8/avgtimehour/period;
-		var z9avg = z9/avgtimehour/period;
-		var z10avg = z10/avgtimehour/period;
-		var z11avg = z11/avgtimehour/period;
-		var z12avg = z12/avgtimehour/period;
-		var z13avg = z13/avgtimehour/period;
-		var z14avg = z14/avgtimehour/period;
-		var z15avg = z15/avgtimehour/period;
-		var z16avg = z16/avgtimehour/period;
-		var z17avg = z17/avgtimehour/period;
-		var z18avg = z18/avgtimehour/period;
-		var z19avg = z19/avgtimehour/period;
-		var z20avg = z20/avgtimehour/period;
-		var nzavg = nz/avgtimehour/period;
-		var dzavg = dz/avgtimehour/period;
+		if (avgtimehour != 0) {
+			var bglavg = bgl/avgtimehour/period;
+			var z1avg = z1/avgtimehour/period;
+			var z2avg = z2/avgtimehour/period;
+			var z3avg = z3/avgtimehour/period;
+			var z4avg = z4/avgtimehour/period;
+			var z5avg = z5/avgtimehour/period;
+			var z6avg = z6/avgtimehour/period;
+			var z7avg = z7/avgtimehour/period;
+			var z8avg = z8/avgtimehour/period;
+			var z9avg = z9/avgtimehour/period;
+			var z10avg = z10/avgtimehour/period;
+			var z11avg = z11/avgtimehour/period;
+			var z12avg = z12/avgtimehour/period;
+			var z13avg = z13/avgtimehour/period;
+			var z14avg = z14/avgtimehour/period;
+			var z15avg = z15/avgtimehour/period;
+			var z16avg = z16/avgtimehour/period;
+			var z17avg = z17/avgtimehour/period;
+			var z18avg = z18/avgtimehour/period;
+			var z19avg = z19/avgtimehour/period;
+			var z20avg = z20/avgtimehour/period;
+			var nzavg = nz/avgtimehour/period;
+			var dzavg = dz/avgtimehour/period;
+		} else {
+			var bglavg = 0, z1avg = 0, z2avg = 0, z3avg = 0, z4avg = 0, z5avg = 0, z6avg = 0, z7avg = 0, z8avg = 0, z8avg = 0, z9avg = 0, z10avg = 0, z11avg = 0, z12avg = 0, z13avg = 0, z14avg = 0, z15avg = 0, z16avg = 0, z17avg = 0, z18avg = 0, z19avg = 0, z20avg = 0, nzavg = 0, dzavg = 0; 
+		}
 		// var total = bglavg + z1avg + z2avg + z3avg + z4avg + z5avg + z6avg + z7avg + z8avg + z9avg + z10avg + z11avg + z12avg + z13avg + z14avg + z15avg + z16avg + z17avg + z18avg + z19avg + z20avg + nzavg + dzavg;
 		return [bglavg, z1avg, z2avg, z3avg, z4avg, z5avg, z6avg, z7avg, z8avg, z9avg, z10avg, z11avg, z12avg, z13avg, z14avg, z15avg, z16avg, z17avg, z18avg, z19avg, z20avg, nzavg, dzavg];
 	}
