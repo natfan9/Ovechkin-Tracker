@@ -1,6 +1,15 @@
 <!doctype html>
 <html>
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156427499-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-156427499-1');
+</script>
 <meta charset="utf-8">
 <title>Alex Ovechkin Goal Projection</title>
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -9,8 +18,8 @@
 	<script type="text/javascript" src="script v3.js"></script>
 	<div class="container">
 		<div class="intro">
-			<h1>Alex Ovechkin Goal Projection</h1>
-			This is a simple projection system that combines recent shot rates, medium term time on ice averages and long term shooting percentages in 10 different even strength and power play situations to attempt to determine how many goals Alex Ovechkin will score in the current season. In addition to those factors, it also combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection also takes into account shot location from 23 different zones on the ice.
+			<h1>The Ovi Tracker</h1>
+			The Ovi Tracker is a simple projection system that combines recent shot rates, medium term time on ice averages and long term shooting percentages in 10 different even strength and power play situations to attempt to determine how many goals Alex Ovechkin will score in the current season. In addition to those factors, the Ovi Tracker combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection takes into account shot location from 23 different zones on the ice.
 		</div>
 		<div class="tab">
 			<button class="tablink" onclick="openPage('projection', this)" id="default">Projection</button>
@@ -30,7 +39,7 @@
 			<div class="table">
 			<table>
 				<tr>
-					<th colspan="2">Season Completed</th>
+					<th colspan="2">Season To Date</th>
 				</tr>
 				<tr>
 					<td class="label">Games</td>
