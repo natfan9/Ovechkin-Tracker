@@ -112,12 +112,15 @@ function weightedFunction(neededOutputs,basis) {
 			var evtimemoving = TOI(maindata,ev,man,82);
 			var evtimeseason = TOI(maindata,ev,man,"season");
 			var evtime = weightedAvg([evtimemoving,evtimeseason],[timeweight,100-timeweight]);
+			var evtimeseconds = evtime*60*60;
+			var evtimedisplay = convertSeconds(evtimeseconds);
 			// console.log(evtime);
 			
 			// Even Strength Shooting Percentage
 			var evpctmoving = shootingPct(maindata,ev,man,basis,410);
 			var evpctseason = shootingPct(maindata,ev,man,basis,"season");
 			var evpct = weightedAvgArray(evpctmoving[0], evpctseason[0], pctweight);
+			var evpctdisplay = weightedAvg([evpctmoving[1], evpctseason[1]], [pctweight,100-pctweight]) * 100;
 			// console.log(evpct);
 
 			var totalevgoalsproj = 0;
@@ -132,12 +135,16 @@ function weightedFunction(neededOutputs,basis) {
 			}
 
 			evoverallgpg += evgpg;
+			console.log(man + " " + basis + " Per 60: " + sumArray(evshots));
+			console.log(man + " Time On Ice Per Game: " + evtimedisplay);
+			console.log(man + " Shooting Percentage: " + evpctdisplay);
 			console.log(man + " Goals Per Game: " + evgpg);
 			console.log(man + " Goals Projection: " + totalevgoalsproj);
+			console.log("----------")
 			evgoalsproj += totalevgoalsproj;
 			// document.getElementById(man).innerHTML = totalevgoalsproj.toPrecision(4);
 		}
-		console.log(evoverallgpg);
+		// console.log(evoverallgpg);
 
 		document.getElementById("evgoals").innerHTML = evgoalsproj.toPrecision(4);
 
@@ -156,12 +163,15 @@ function weightedFunction(neededOutputs,basis) {
 			var pptimemoving = TOI(maindata,pp,man,82);
 			var pptimeseason = TOI(maindata,pp,man,"season");
 			var pptime = weightedAvg([pptimemoving,pptimeseason],[timeweight,100-timeweight]);
+			var pptimeseconds = pptime*60*60;
+			var pptimedisplay = convertSeconds(pptimeseconds);
 			// console.log(pptime);
 			
 			// Power Play Shooting Percentage
 			var pppctmoving = shootingPct(maindata,pp,man,basis,410);
 			var pppctseason = shootingPct(maindata,pp,man,basis,"season");
 			var pppct = weightedAvgArray(pppctmoving[0], pppctseason[0], pctweight);
+			var pppctdisplay = weightedAvg([pppctmoving[1], pppctseason[1]], [pctweight,100-pctweight]) * 100;
 			// console.log(pppct);
 			
 			var totalppgoalsproj = 0;
@@ -176,13 +186,17 @@ function weightedFunction(neededOutputs,basis) {
 			}
 
 			ppoverallgpg += ppgpg;
+			console.log(man + " " + basis + " Per 60: " + sumArray(ppshots));
+			console.log(man + " Time On Ice Per Game: " + pptimedisplay);
+			console.log(man + " Shooting Percentage: " + pppctdisplay);
 			console.log(man + " Goals Per Game: " + ppgpg);
 			console.log(man + " Goals Projection: " + totalppgoalsproj);
+			console.log("----------");
 			ppgoalsproj += totalppgoalsproj;
 			// document.getElementById(man).innerHTML = totalppgoalsproj.toPrecision(4);
 
 		}
-		console.log(ppoverallgpg);
+		// console.log(ppoverallgpg);
 
 		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toPrecision(4);
 
@@ -242,15 +256,18 @@ function pureFunction(neededOutputs,basis) {
 			
 			// Even Strength Shots
 			var evshots = per60(maindata,ev,man,basis,30);
-			console.log(evshots);
+			// console.log(evshots);
 
 			// Even Strength Time On Ice
 			var evtime = TOI(maindata,ev,man,82);
-			console.log(evtime);
+			var evtimeseconds = evtime*60*60;
+			var evtimedisplay = convertSeconds(evtimeseconds);
+			// console.log(evtime);
 
 			// Even Strength Shooting Percentage
 			var evpct = shootingPct(maindata,ev,man,basis,410);
-			console.log(evpct);
+			var evpctdisplay = evpct[1] * 100;
+			// console.log(evpct);
 			
 			var totalevgoalsproj = 0;
 			var evgpg = 0;
@@ -265,12 +282,16 @@ function pureFunction(neededOutputs,basis) {
 
 			evoverallgpg += evgpg;
 			evgoalsproj += totalevgoalsproj;
+			console.log(man + " " + basis + " Per 60: " + sumArray(evshots));
+			console.log(man + " Time On Ice Per Game: " + evtimedisplay);
+			console.log(man + " Shooting Percentage: " + evpctdisplay);
 			console.log(man + " Goals Per Game: " + evgpg);
 			console.log(man + " Goals Projection: " + totalevgoalsproj);
+			console.log("----------");
 			// document.getElementById(man).innerHTML = totalevgoalsproj.toPrecision(4);
 
 		}
-		console.log(evoverallgpg);
+		// console.log(evoverallgpg);
 
 		document.getElementById("evgoals").innerHTML = evgoalsproj.toPrecision(4);
 
@@ -281,15 +302,18 @@ function pureFunction(neededOutputs,basis) {
 
 			// Power Play Shots
 			var ppshots = per60(maindata,pp,man,basis,30);
-			console.log(ppshots);
+			// console.log(ppshots);
 
 			// Power Play Time On Ice
 			var pptime = TOI(maindata,pp,man,82);
-			console.log(pptime);
+			var pptimeseconds = pptime*60*60;
+			var pptimedisplay = convertSeconds(pptimeseconds);
+			// console.log(pptime);
 
 			// Power Play Shooting Percentage
 			var pppct = shootingPct(maindata,pp,man,basis,410);
-			console.log(pppct);
+			var pppctdisplay = evpct[1] * 100;
+			// console.log(pppct);
 
 			var totalppgoalsproj = 0;
 			var ppgpg = 0;
@@ -304,12 +328,16 @@ function pureFunction(neededOutputs,basis) {
 
 			ppoverallgpg += ppgpg;
 			ppgoalsproj += totalppgoalsproj;
+			console.log(man + " " + basis + " Per 60: " + sumArray(ppshots));
+			console.log(man + " Time On Ice Per Game: " + pptimedisplay);
+			console.log(man + " Shooting Percentage: " + pppctdisplay);
 			console.log(man + " Goals Per Game: " + ppgpg);
 			console.log(man + " Goals Projection: " + totalppgoalsproj);
+			console.log("----------");
 			// document.getElementById(man).innerHTML = totalppgoalsproj.toPrecision(4);
 		
 		}
-		console.log(ppoverallgpg);
+		// console.log(ppoverallgpg);
 
 		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toPrecision(4);
 
