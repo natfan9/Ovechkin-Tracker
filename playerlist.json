@@ -1,19 +1,17 @@
-[{"name": "Jozy Altidore",
+[{"name": "Julian Gressel",
+    "team": "Example",
+    "position": "RB",
+    "status": [],
+    "breakdown": {
+        "TAM": 900000,
+        "cap": 550000}},
+{"name": "Jozy Altidore",
     "team": "Example",
     "position": "FW",
     "status": [
         "DP"],
     "breakdown": {
         "DP": 5950000,
-        "cap": 550000}},
-{"name": "Jonathan Dos Santos",
-    "team": "Example",
-    "position": "CM",
-    "status": [
-        "DP",
-        "INTL"],
-    "breakdown": {
-        "DP": 4250000,
         "cap": 550000}},
 {"name": "Diego Rossi",
     "team": "Example",
@@ -23,4 +21,13 @@
         "INTL"],
     "breakdown": {
         "DP": 1050000,
+        "cap": 550000}},
+{"name": "Jonathan Dos Santos",
+    "team": "Example",
+    "position": "CM",
+    "status": [
+        "DP",
+        "INTL"],
+    "breakdown": {
+        "DP": 4250000,
         "cap": 550000}}]
