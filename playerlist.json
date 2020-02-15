@@ -1,4 +1,4 @@
-{"Jozy Altidore": {
+[{"name": "Jozy Altidore",
     "team": "Example",
     "position": "FW",
     "status": [
@@ -6,7 +6,7 @@
     "breakdown": {
         "DP": 5950000,
         "cap": 550000}},
-"Jonathan Dos Santos": {
+{"name": "Jonathan Dos Santos",
     "team": "Example",
     "position": "CM",
     "status": [
@@ -15,7 +15,7 @@
     "breakdown": {
         "DP": 4250000,
         "cap": 550000}},
-"Diego Rossi": {
+{"name": "Diego Rossi",
     "team": "Example",
     "position": "LW",
     "status": [
@@ -23,5 +23,4 @@
         "INTL"],
     "breakdown": {
         "DP": 1050000,
-        "cap": 550000}}
-}
+        "cap": 550000}}]
