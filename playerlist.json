@@ -1,6 +1,6 @@
-[{"name": "Julian Gressel",
+[{"name": "Eduard Atuesta",
     "team": "Example",
-    "position": "RB",
+    "position": "CM",
     "status": [],
     "breakdown": {
         "TAM": 900000,
@@ -30,4 +30,19 @@
         "INTL"],
     "breakdown": {
         "DP": 4250000,
-        "cap": 550000}}]
+        "cap": 550000}},
+{"name": "Walker Zimmerman",
+    "team": "Example",
+    "position": "CB",
+    "status": [],
+    "breakdown": {
+        "TAM": 450000,
+        "cap": 550000}},
+{"name": "Roman Torres",
+    "team": "Example",
+    "position": "CB",
+    "status": [
+        "INTL"],
+    "breakdown": {
+        "TAM": 100000,
+        "cap": 500000}}]
