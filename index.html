@@ -11,13 +11,14 @@
   gtag('config', 'UA-156427499-1');
 </script>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alex Ovechkin Goal Projection</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<script type="text/javascript" src="script v3.js"></script>
 	<div class="container">
-		<div class="intro">
+		<div class="intro col-12 col-s-12">
 			<h1>The Ovi Tracker</h1>
 			The Ovi Tracker is a simple projection system that that attempts to go beyond simple pace to attempt to determine how many goals Alex Ovechkin will score in the current season. It combines recent shot rates, medium term time on ice averages and long term shooting percentages in 10 different even strength and power play situations. In addition to those factors, the Ovi Tracker combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection takes into account shot location from 23 different zones on the ice.
 		</div>
@@ -28,15 +29,8 @@
 		</div>
 		<div class="page">
 			<!--<h1>The Projechkin</h1>-->
-		<div class="tabcontent" id="projection">
-			<div class="right">
-				<h3>Factor Controls</h3>
-				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics <i>default</i><br><br>
-				<input type="radio" value="shots" name="group2" id="shotsbutton" onclick="checkboxFunction()"> Shot Based (Shots on Goal)<br>
-				<input type="radio" value="fenwick" name="group2" id="fenwickbutton" onclick="checkboxFunction()" checked> Fenwick Based (Unblocked Shot Attempts) <i>default</i><br>
-				<!--<input type="radio" value="corsi" name="group2" id="corsibutton" onclick="checkboxFunction()"> Corsi Based (All Shot Attempts)<br>-->
-			</div>
-			<div class="table">
+		<div class="tabcontent col-12 col-s-12" id="projection">
+			<div class="table col-4 col-s-4">
 			<table>
 				<tr>
 					<th colspan="2">Season To Date</th>
@@ -120,8 +114,15 @@
 				</tr>
 			</table>
 			</div>
+			<div class="right col-8 col-s-8">
+				<h3>Factor Controls</h3>
+				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics <i>default</i><br><br>
+				<input type="radio" value="shots" name="group2" id="shotsbutton" onclick="checkboxFunction()"> Shot Based (Shots on Goal)<br>
+				<input type="radio" value="fenwick" name="group2" id="fenwickbutton" onclick="checkboxFunction()" checked> Fenwick Based (Unblocked Shot Attempts) <i>default</i><br>
+				<!--<input type="radio" value="corsi" name="group2" id="corsibutton" onclick="checkboxFunction()"> Corsi Based (All Shot Attempts)<br>-->
+			</div>
 		</div>
-		<div class="tabcontent" id="milestone">
+		<div class="tabcontent col-12 col-s-12" id="milestone">
 			<table>
 				<tr>
 					<th>Round Numbers</th>
@@ -130,19 +131,19 @@
 					<th>Projected Date</th>
 				</tr>
 				<tr>
-					<td class="label">725 Goals</td>
+					<td class="milelable">725 Goals</td>
 					<td class="milestone" id="725goalsleft"></td>
 					<td class="milestone" id="725gamesleft"></td>
 					<td class="projdate" id="725hitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">750 Goals</td>
+					<td class="milelable">750 Goals</td>
 					<td class="milestone" id="750goalsleft"></td>
 					<td class="milestone" id="750gamesleft"></td>
 					<td class="projdate" id="750hitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">775 Goals</td>
+					<td class="milelable">775 Goals</td>
 					<td class="milestone" id="775goalsleft"></td>
 					<td class="milestone" id="775gamesleft"></td>
 					<td class="projdate" id="775hitdate"></td>
@@ -154,67 +155,67 @@
 					<th>Projected Date</th>
 				</tr>
 				<!--<tr>
-					<td class="label">11th - Selanne (684)</td>
+					<td class="milelable">11th - Selanne (684)</td>
 					<td class="milestone" id="selannegoalsleft"></td>
 					<td class="milestone" id="selannegamesleft"></td>
 					<td class="projdate" id="selannehitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">10th - Lemieux (690)</td>
+					<td class="milelable">10th - Lemieux (690)</td>
 					<td class="milestone" id="lemieuxgoalsleft"></td>
 					<td class="milestone" id="lemieuxgamesleft"></td>
 					<td class="projdate" id="lemieuxhitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">9th - Yzerman (692)</td>
+					<td class="milelable">9th - Yzerman (692)</td>
 					<td class="milestone" id="yzermangoalsleft"></td>
 					<td class="milestone" id="yzermangamesleft"></td>
 					<td class="projdate" id="yzermanhitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">8th - Messier (694)</td>
+					<td class="milelable">8th - Messier (694)</td>
 					<td class="milestone" id="messiergoalsleft"></td>
 					<td class="milestone" id="messiergamesleft"></td>
 					<td class="projdate" id="messierhitdate"></td>
 				</tr>-->
 				<tr>
-					<td class="label">7th - Gartner (708)</td>
+					<td class="milelable">7th - Gartner (708)</td>
 					<td class="milestone" id="gartnergoalsleft"></td>
 					<td class="milestone" id="gartnergamesleft"></td>
 					<td class="projdate" id="gartnerhitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">6th - Esposito (717)</td>
+					<td class="milelable">6th - Esposito (717)</td>
 					<td class="milestone" id="espositogoalsleft"></td>
 					<td class="milestone" id="espositogamesleft"></td>
 					<td class="projdate" id="espositohitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">5th - Dionne (731)</td>
+					<td class="milelable">5th - Dionne (731)</td>
 					<td class="milestone" id="dionnegoalsleft"></td>
 					<td class="milestone" id="dionnegamesleft"></td>
 					<td class="projdate" id="dionnehitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">4th - Hull (741)</td>
+					<td class="milelable">4th - Hull (741)</td>
 					<td class="milestone" id="hullgoalsleft"></td>
 					<td class="milestone" id="hullgamesleft"></td>
 					<td class="projdate" id="hullhitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">3rd - Jagr (766)</td>
+					<td class="milelable">3rd - Jagr (766)</td>
 					<td class="milestone" id="jagrgoalsleft"></td>
 					<td class="milestone" id="jagrgamesleft"></td>
 					<td class="projdate" id="jagrhitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">2nd - Howe (801)</td>
+					<td class="milelable">2nd - Howe (801)</td>
 					<td class="milestone" id="howegoalsleft"></td>
 					<td class="milestone" id="howegamesleft"></td>
 					<td class="projdate" id="howehitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">1st - Gretzky (894)</td>
+					<td class="milelable">1st - Gretzky (894)</td>
 					<td class="milestone" id="gretzkygoalsleft"></td>
 					<td class="milestone" id="gretzkygamesleft"></td>
 					<td class="projdate" id="gretzkyhitdate"></td>
@@ -226,26 +227,26 @@
 					<th>Projected Date</th>
 				</tr>
 				<!--<tr>
-					<td class="label">3rd - Selanne (255)</td>
+					<td class="milelable">3rd - Selanne (255)</td>
 					<td class="milestone" id="selanneppgoalsleft"></td>
 					<td class="milestone" id="selanneppgamesleft"></td>
 					<td class="projdate" id="selannepphitdate"></td>
 				</tr>-->
 				<tr>
-					<td class="label">2nd - Hull (265)</td>
+					<td class="milelable">2nd - Hull (265)</td>
 					<td class="milestone" id="hullppgoalsleft"></td>
 					<td class="milestone" id="hullppgamesleft"></td>
 					<td class="projdate" id="hullpphitdate"></td>
 				</tr>
 				<tr>
-					<td class="label">1st - Andreychuk (274)</td>
+					<td class="milelable">1st - Andreychuk (274)</td>
 					<td class="milestone" id="andreychukppgoalsleft"></td>
 					<td class="milestone" id="andreychukppgamesleft"></td>
 					<td class="projdate" id="andreychukpphitdate"></td>
 				</tr>
 			</table>
 		</div>
-		<div class="tabcontent" id="updatelog">
+		<div class="tabcontent col-12 col-s-12" id="updatelog">
 			<h2>Update Log</h2>
 			<ul>
 				<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage <i>(11/10/19)</i></li>
@@ -272,7 +273,7 @@
 				<li>Change shot location to shot danger based on <a href="https://www.naturalstattrick.com/glossary.php?teams">Natural Stat Trick</a> and <a href="http://blog.war-on-ice.com/new-defining-scoring-chances/index.html">War-On-Ice's</a> defininion of chance danger</li>
 				<li>Factor in basic on ice teammate impact</li>
 			</ul>
-		</div>
+			</div>
 		</div>
 	</div>
 </body>

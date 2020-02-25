@@ -2,22 +2,26 @@
 /* CSS Document */
 
 td.label {
-	width: 170px;
+	width: 60%;
 }
 
 td.number {
-	width: 80px;
+	width: 40%;
 	text-align: center;
 }
 
 td.projdate {
-	width: 200px;
+	width: 35%;
 	text-align: center;
 }
 
 td.milestone{
-	width: 90px;
+	width: 17.5%;
 	text-align: center;
+}
+
+td.milelabel {
+	width: 30%;
 }
 
 td.compstats,td.outputstats {
@@ -26,6 +30,7 @@ td.compstats,td.outputstats {
 
 table {
 	border-collapse: collapse;
+	width: 100%;
 }
 
 table,td,th {
@@ -55,16 +60,18 @@ body {
 
 div.container {
 	margin: auto;
-	width: 825px;
+	max-width: 825px;
+	width: 95%;
 }
 
 div.page {
-	margin: auto;
-	width: 825px;
+	/* margin: auto; */
+	max-width: 799px;
+	width: 100%;
 }
 
 h1,h2,h3 {
-	position: relative;
+	/* position: relative; */
 	border-bottom: 3px solid #ab0003;
 	padding-bottom: 5px;
 }
@@ -73,6 +80,8 @@ h1,h2,h3 {
 	overflow: hidden;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
+	max-width: 799px;
+	width: 100%;
 }
 
 .tab button {
@@ -101,12 +110,13 @@ h1,h2,h3 {
 	padding: 6px 12px;
 	border: 1px solid #ccc;
 	border-top: none;
-	width: 800px;
+	width: 100%;
 	background-color: white;
 }
 
 .intro {
-	width: 800px;
+	max-width: 799px;
+	width: 100%;
 	background-color: white;
 	border: 1px solid #ccc;
 	border-bottom: none;
@@ -121,14 +131,65 @@ h1,p {
 	float: left;
 }*/
 
-div.right {
+/* div.right {
 	position: relative;
-	/*left: 300px;*/
+	/*left: 300px;
 	float: right;
 	width: 500px;
-}
+} */
 
 i {
 	color: #999999;
 	font-weight: lighter;
+}
+
+* {
+    box-sizing: border-box;
+}
+  
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 5px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-s-1 {width: 8.33%;}
+    .col-s-2 {width: 16.66%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33%;}
+    .col-s-5 {width: 41.66%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33%;}
+    .col-s-8 {width: 66.66%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33%;}
+    .col-s-11 {width: 91.66%;}
+    .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
 }
