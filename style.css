@@ -2,11 +2,11 @@
 /* CSS Document */
 
 td.label {
-	width: 60%;
+	width: 66.67%;
 }
 
 td.number {
-	width: 40%;
+	width: 33.33%;
 	text-align: center;
 }
 
@@ -120,7 +120,11 @@ h1,h2,h3 {
 	background-color: white;
 	border: 1px solid #ccc;
 	border-bottom: none;
-	padding: 6px 12px;
+	padding: 10px;
+}
+
+#milestone, #updatelog {
+	padding: 10px;
 }
 
 h1,p {
