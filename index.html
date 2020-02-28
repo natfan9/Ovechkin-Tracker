@@ -18,7 +18,7 @@
 <body>
 	<script type="text/javascript" src="script v3.js"></script>
 	<div class="container">
-		<div class="intro col-12 col-s-12">
+		<div class="intro col-12 col-t-12 col-m-12">
 			<h1>The Ovi Tracker</h1>
 			The Ovi Tracker is a simple projection system that that attempts to go beyond simple pace to attempt to determine how many goals Alex Ovechkin will score in the current season. It combines recent shot rates, medium term time on ice averages and long term shooting percentages in 10 different even strength and power play situations. In addition to those factors, the Ovi Tracker combines those same statistics with their current season analogs on a weighted basis. Lastly, this projection takes into account shot location from 23 different zones on the ice.
 		</div>
@@ -29,8 +29,8 @@
 		</div>
 		<div class="page">
 			<!--<h1>The Projechkin</h1>-->
-		<div class="tabcontent col-12 col-s-12" id="projection">
-			<div class="table col-4 col-s-4">
+		<div class="tabcontent col-12 col-t-12 col-m-12" id="projection">
+			<div class="table col-4 col-t-4 col-m-12">
 			<table>
 				<tr>
 					<th colspan="2">Season To Date</th>
@@ -114,7 +114,7 @@
 				</tr>
 			</table>
 			</div>
-			<div class="right col-8 col-s-8">
+			<div class="right col-8 col-t-8 col-m-12">
 				<h3>Factor Controls</h3>
 				<input type="checkbox" id="weightedpure" onclick="checkboxFunction()" checked> Factor in current season statistics <i>default</i><br><br>
 				<input type="radio" value="shots" name="group2" id="shotsbutton" onclick="checkboxFunction()"> Shot Based (Shots on Goal)<br>
@@ -122,7 +122,7 @@
 				<!--<input type="radio" value="corsi" name="group2" id="corsibutton" onclick="checkboxFunction()"> Corsi Based (All Shot Attempts)<br>-->
 			</div>
 		</div>
-		<div class="tabcontent col-12 col-s-12" id="milestone">
+		<div class="tabcontent col-12 col-t-12 col-m-12" id="milestone">
 			<table>
 				<tr>
 					<th>Round Numbers</th>
@@ -246,7 +246,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="tabcontent col-12 col-s-12" id="updatelog">
+		<div class="tabcontent col-12 col-t-12 col-m-12" id="updatelog">
 			<h2>Update Log</h2>
 			<ul>
 				<li><b>v0.9:</b> Completed calculations based purely on averages from last 20 games for shots, last 82 for TOI, and last 246 for shooting percentage <i>(11/10/19)</i></li>
