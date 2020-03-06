@@ -142,11 +142,11 @@ function weightedFunction(neededOutputs,basis) {
 			console.log(man + " Goals Projection: " + totalevgoalsproj);
 			console.log("----------")
 			evgoalsproj += totalevgoalsproj;
-			// document.getElementById(man).innerHTML = totalevgoalsproj.toPrecision(4);
+			// document.getElementById(man).innerHTML = totalevgoalsproj.toFixed(2);
 		}
 		// console.log(evoverallgpg);
 
-		document.getElementById("evgoals").innerHTML = evgoalsproj.toPrecision(4);
+		document.getElementById("evgoals").innerHTML = evgoalsproj.toFixed(2);
 
 		var ppgoalsproj = 0;
 		var ppoverallgpg = 0;
@@ -193,18 +193,18 @@ function weightedFunction(neededOutputs,basis) {
 			console.log(man + " Goals Projection: " + totalppgoalsproj);
 			console.log("----------");
 			ppgoalsproj += totalppgoalsproj;
-			// document.getElementById(man).innerHTML = totalppgoalsproj.toPrecision(4);
+			// document.getElementById(man).innerHTML = totalppgoalsproj.toFixed(2);
 
 		}
 		// console.log(ppoverallgpg);
 
-		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toPrecision(4);
+		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toFixed(2);
 
 		var totalgoalsproj = evgoalsproj + ppgoalsproj;		
 		console.log("Total Goals Projection: " + (evgoalsproj + ppgoalsproj));
-		document.getElementById("totalgoals").innerHTML = totalgoalsproj.toPrecision(4);
+		document.getElementById("totalgoals").innerHTML = totalgoalsproj.toFixed(2);
 		var totalcareergoals = careergoals + totalgoalsproj;
-		document.getElementById("careergoalsproj").innerHTML = totalcareergoals.toPrecision(3);
+		document.getElementById("careergoalsproj").innerHTML = totalcareergoals.toFixed(0);
 
 		neededOutputs({games:games,goals:goals,evgoals:totalevgoals,ppgoals:totalppgoals,evgpg:evoverallgpg,ppgpg:ppoverallgpg});
 	}
@@ -288,12 +288,12 @@ function pureFunction(neededOutputs,basis) {
 			console.log(man + " Goals Per Game: " + evgpg);
 			console.log(man + " Goals Projection: " + totalevgoalsproj);
 			console.log("----------");
-			// document.getElementById(man).innerHTML = totalevgoalsproj.toPrecision(4);
+			// document.getElementById(man).innerHTML = totalevgoalsproj.toFixed(2);
 
 		}
 		// console.log(evoverallgpg);
 
-		document.getElementById("evgoals").innerHTML = evgoalsproj.toPrecision(4);
+		document.getElementById("evgoals").innerHTML = evgoalsproj.toFixed(2);
 
 		var ppgoalsproj = 0;
 		var ppoverallgpg = 0;
@@ -334,18 +334,18 @@ function pureFunction(neededOutputs,basis) {
 			console.log(man + " Goals Per Game: " + ppgpg);
 			console.log(man + " Goals Projection: " + totalppgoalsproj);
 			console.log("----------");
-			// document.getElementById(man).innerHTML = totalppgoalsproj.toPrecision(4);
+			// document.getElementById(man).innerHTML = totalppgoalsproj.toFixed(2);
 		
 		}
 		// console.log(ppoverallgpg);
 
-		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toPrecision(4);
+		document.getElementById("ppgoals").innerHTML = ppgoalsproj.toFixed(2);
 
 		var totalgoalsproj = evgoalsproj + ppgoalsproj;		
 		console.log("Total Goals Projection: " + (evgoalsproj + ppgoalsproj));
-		document.getElementById("totalgoals").innerHTML = totalgoalsproj.toPrecision(4);
+		document.getElementById("totalgoals").innerHTML = totalgoalsproj.toFixed(2);
 		var totalcareergoals = careergoals + totalgoalsproj;
-		document.getElementById("careergoalsproj").innerHTML = totalcareergoals.toPrecision(3);
+		document.getElementById("careergoalsproj").innerHTML = totalcareergoals.toFixed(0);
 
 		neededOutputs({games:games,goals:goals,evgoals:totalevgoals,ppgoals:totalppgoals,evgpg:evoverallgpg,ppgpg:ppoverallgpg});
 	}
