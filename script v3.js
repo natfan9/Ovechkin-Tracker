@@ -386,7 +386,7 @@ function milestoneFunction(obj) {
 	request.onload = function() {
 		var maindata = request.response;
 		
-		var scheduledata = "https://natfan9.github.io/Ovechkin-Tracker/schedule2019.json";
+		var scheduledata = "https://natfan9.github.io/Ovechkin-Tracker/schedule2020.json";
 		var schedule = new XMLHttpRequest();
 		schedule.open('GET', scheduledata);
 		schedule.responseType = 'json';
