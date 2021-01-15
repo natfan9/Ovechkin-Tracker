@@ -1,7 +1,7 @@
-var currentseason = 2019;
-var gamestoplay = 81;
-var careergoals = 658;
-var careerppgoals = 247;
+var currentseason = 2020;
+var gamestoplay = 56;
+var careergoals = 706;
+var careerppgoals = 260;
 
 function openPage(pageName, elmnt) {
   // Hide all elements with class="tabcontent" by default */
