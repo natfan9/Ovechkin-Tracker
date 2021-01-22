@@ -1,5 +1,5 @@
 var currentseason = 2020;
-var gamestoplay = 56;
+var gamestoplay = 52;
 var careergoals = 706;
 var careerppgoals = 260;
 
