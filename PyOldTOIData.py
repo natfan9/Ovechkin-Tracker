@@ -26,6 +26,7 @@ ltrVenues = [
     "Bridgestone Arena",
     "Prudential Center",
     "NYCB Live/Nassau Coliseum",
+    "Nassau Veterans Memorial Coliseum",
     "Barclays Center",
     "Canadian Tire Centre",
     "PPG Paints Arena",
