@@ -1,7 +1,7 @@
-var currentseason = 2020;
-var gamestoplay = 52;
-var careergoals = 706;
-var careerppgoals = 260;
+var currentseason = 2021;
+var gamestoplay = 82;
+var careergoals = 730;
+var careerppgoals = 269;
 
 function openPage(pageName, elmnt) {
   // Hide all elements with class="tabcontent" by default */
@@ -386,7 +386,7 @@ function milestoneFunction(obj) {
 	request.onload = function() {
 		var maindata = request.response;
 		
-		var scheduledata = "https://natfan9.github.io/Ovechkin-Tracker/schedule2020.json";
+		var scheduledata = "https://natfan9.github.io/Ovechkin-Tracker/schedule2021.json";
 		var schedule = new XMLHttpRequest();
 		schedule.open('GET', scheduledata);
 		schedule.responseType = 'json';
@@ -395,7 +395,7 @@ function milestoneFunction(obj) {
 		schedule.onload = function() {
 			var xhrschedule = schedule.response;
 			//Round Number Milestones
-			var goalsleft725 = 725 - (obj.goals + careergoals);
+			var goalsleft725 = 750 - (obj.goals + careergoals);
 			document.getElementById("725goalsleft").innerHTML = goalsleft725;
 			var gamesleft725 = Math.ceil(goalsleft725 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("725gamesleft").innerHTML = gamesleft725;
@@ -411,7 +411,7 @@ function milestoneFunction(obj) {
 				document.getElementById("725hitdate").innerHTML = "Unable to project";
 			}
 
-			var goalsleft750 = 750 - (obj.goals + careergoals);
+			var goalsleft750 = 775 - (obj.goals + careergoals);
 			document.getElementById("750goalsleft").innerHTML = goalsleft750;
 			var gamesleft750 = Math.ceil(goalsleft750 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("750gamesleft").innerHTML = gamesleft750;
@@ -427,7 +427,7 @@ function milestoneFunction(obj) {
 				document.getElementById("750hitdate").innerHTML = "Unable to project";
 			}
 
-			var goalsleft775 = 775 - (obj.goals + careergoals);
+			var goalsleft775 = 800 - (obj.goals + careergoals);
 			document.getElementById("775goalsleft").innerHTML = goalsleft775;
 			var gamesleft775 = Math.ceil(goalsleft775 / (obj.evgpg + obj.ppgpg));
 			document.getElementById("775gamesleft").innerHTML = gamesleft775;

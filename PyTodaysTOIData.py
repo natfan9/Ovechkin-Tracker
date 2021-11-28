@@ -29,6 +29,7 @@ ltrVenues = [
     "NYCB Live/Nassau Coliseum",
     "Nassau Veterans Memorial Coliseum",
     "Barclays Center",
+    "UBS Arena",
     "Canadian Tire Centre",
     "PPG Paints Arena",
     "CONSOL Energy Center",
@@ -36,7 +37,8 @@ ltrVenues = [
     "Enterprise Center",
     "Scottrade Center",
     "Amalie Arena",
-    "Tampa Bay Times Forum"]
+    "Tampa Bay Times Forum",
+    "Climate Pledge Arena"]
 rtlVenues = [
     "Scotiabank Saddledome",
     "PNC Arena",
@@ -47,7 +49,9 @@ rtlVenues = [
     "Joe Louis Arena",
     "Rexall Place",
     "BB&T Center",
+    "FLA Live Arena",
     "STAPLES Center", "Staples Center",
+    "Crypto.com Arena",
     "Xcel Energy Center",
     "Centre Bell",
     "Nassau Coliseum",
