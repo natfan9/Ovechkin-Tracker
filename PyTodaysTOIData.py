@@ -8,7 +8,7 @@ import hockey_scraper
 
 today = date.today()
 now = datetime.now()
-# now = now - timedelta(days=1)
+now = now - timedelta(days=1)
 est = pytz.timezone("America/New_York")
 pst = pytz.timezone("America/Los_Angeles")
 loc_dt = est.localize(now)
