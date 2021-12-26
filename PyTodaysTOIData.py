@@ -62,7 +62,8 @@ rtlVenues = [
     "Rogers Arena",
     "T-Mobile Arena",
     "Bell MTS Place",
-    "MTS Centre"]
+    "MTS Centre",
+    "Canada Life Centre"]
 homeLtRVenues = ["Navy-Marine Corps Memorial Stadium"]
 homeRtLVenues = ["Capital One Arena","Verizon Center","Nationals Park"]
 homeVenues = ["Navy-Marine Corps Memorial Stadium","Capital One Arena","Verizon Center","Nationals Park"]
