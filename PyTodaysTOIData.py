@@ -44,6 +44,7 @@ rtlVenues = [
     "PNC Arena",
     "United Center",
     "Pepsi Center",
+    "Ball Arena",
     "American Airlines Center",
     "Little Caesars Arena",
     "Joe Louis Arena",

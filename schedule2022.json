@@ -1,0 +1,576 @@
+[
+ {
+   "Date": "10/12",
+   "Venue": "home",
+   "Initialism": "BOS",
+   "Nickname": "Bruins",
+   "Longform": "Boston Bruins"
+ },
+ {
+   "Date": "10/13",
+   "Venue": "away",
+   "Initialism": "TOR",
+   "Nickname": "Maple Leafs",
+   "Longform": "Toronto Maple Leafs"
+ },
+ {
+   "Date": "10/15",
+   "Venue": "home",
+   "Initialism": "MTL",
+   "Nickname": "Canadiens",
+   "Longform": "Montreal Canadiens"
+ },
+ {
+   "Date": "10/17",
+   "Venue": "home",
+   "Initialism": "VAN",
+   "Nickname": "Canucks",
+   "Longform": "Vancouver Canucks"
+ },
+ {
+   "Date": "10/20",
+   "Venue": "away",
+   "Initialism": "OTT",
+   "Nickname": "Senators",
+   "Longform": "Ottawa Senators"
+ },
+ {
+   "Date": "10/22",
+   "Venue": "home",
+   "Initialism": "LAK",
+   "Nickname": "Kings",
+   "Longform": "Los Angeles Kings"
+ },
+ {
+   "Date": "10/24",
+   "Venue": "away",
+   "Initialism": "NJD",
+   "Nickname": "Devils",
+   "Longform": "New Jersey Devils"
+ },
+ {
+   "Date": "10/27",
+   "Venue": "away",
+   "Initialism": "DAL",
+   "Nickname": "Stars",
+   "Longform": "Dallas Stars"
+ },
+ {
+   "Date": "10/29",
+   "Venue": "away",
+   "Initialism": "NSH",
+   "Nickname": "Predators",
+   "Longform": "Nashville Predators"
+ },
+ {
+   "Date": "10/31",
+   "Venue": "away",
+   "Initialism": "CAR",
+   "Nickname": "Hurricanes",
+   "Longform": "Carolina Hurricanes"
+ },
+ {
+   "Date": "11/1",
+   "Venue": "home",
+   "Initialism": "VGK",
+   "Nickname": "Golden Knights",
+   "Longform": "Vegas Golden Knights"
+ },
+ {
+   "Date": "11/3",
+   "Venue": "away",
+   "Initialism": "DET",
+   "Nickname": "Red Wings",
+   "Longform": "Detroit Red Wings"
+ },
+ {
+   "Date": "11/5",
+   "Venue": "home",
+   "Initialism": "ARI",
+   "Nickname": "Coyotes",
+   "Longform": "Arizona Coyotes"
+ },
+ {
+   "Date": "11/7",
+   "Venue": "home",
+   "Initialism": "EDM",
+   "Nickname": "Oilers",
+   "Longform": "Edmonton Oilers"
+ },
+ {
+   "Date": "11/9",
+   "Venue": "home",
+   "Initialism": "PIT",
+   "Nickname": "Penguins",
+   "Longform": "Pittsburgh Penguins"
+ },
+ {
+   "Date": "11/11",
+   "Venue": "home",
+   "Initialism": "TBL",
+   "Nickname": "Lightning",
+   "Longform": "Tampa Bay Lightning"
+ },
+ {
+   "Date": "11/13",
+   "Venue": "away",
+   "Initialism": "TBL",
+   "Nickname": "Lightning",
+   "Longform": "Tampa Bay Lightning"
+ },
+ {
+   "Date": "11/15",
+   "Venue": "away",
+   "Initialism": "FLA",
+   "Nickname": "Panthers",
+   "Longform": "Florida Panthers"
+ },
+ {
+   "Date": "11/17",
+   "Venue": "away",
+   "Initialism": "STL",
+   "Nickname": "Blues",
+   "Longform": "St Louis Blues"
+ },
+ {
+   "Date": "11/19",
+   "Venue": "home",
+   "Initialism": "COL",
+   "Nickname": "Avalanche",
+   "Longform": "Colorado Avalanche"
+ },
+ {
+   "Date": "11/23",
+   "Venue": "home",
+   "Initialism": "PHI",
+   "Nickname": "Flyers",
+   "Longform": "Philadelphia Flyers"
+ },
+ {
+   "Date": "11/25",
+   "Venue": "home",
+   "Initialism": "CGY",
+   "Nickname": "Flames",
+   "Longform": "Calgary Flames"
+ },
+ {
+   "Date": "11/26",
+   "Venue": "away",
+   "Initialism": "NJD",
+   "Nickname": "Devils",
+   "Longform": "New Jersey Devils"
+ },
+ {
+   "Date": "11/29",
+   "Venue": "away",
+   "Initialism": "VAN",
+   "Nickname": "Canucks",
+   "Longform": "Vancouver Canucks"
+ },
+ {
+   "Date": "12/1",
+   "Venue": "away",
+   "Initialism": "SEA",
+   "Nickname": "Kraken",
+   "Longform": "Seattle Kraken"
+ },
+ {
+   "Date": "12/3",
+   "Venue": "away",
+   "Initialism": "CGY",
+   "Nickname": "Flames",
+   "Longform": "Calgary Flames"
+ },
+ {
+   "Date": "12/5",
+   "Venue": "away",
+   "Initialism": "EDM",
+   "Nickname": "Oilers",
+   "Longform": "Edmonton Oilers"
+ },
+ {
+   "Date": "12/7",
+   "Venue": "away",
+   "Initialism": "PHI",
+   "Nickname": "Flyers",
+   "Longform": "Philadelphia Flyers"
+ },
+ {
+   "Date": "12/9",
+   "Venue": "home",
+   "Initialism": "SEA",
+   "Nickname": "Kraken",
+   "Longform": "Seattle Kraken"
+ },
+ {
+   "Date": "12/11",
+   "Venue": "away",
+   "Initialism": "WPG",
+   "Nickname": "Jets",
+   "Longform": "Winnipeg Jets"
+ },
+ {
+   "Date": "12/13",
+   "Venue": "away",
+   "Initialism": "CHI",
+   "Nickname": "Blackhawks",
+   "Longform": "Chicago Blackhawks"
+ },
+ {
+   "Date": "12/15",
+   "Venue": "home",
+   "Initialism": "DAL",
+   "Nickname": "Stars",
+   "Longform": "Dallas Stars"
+ },
+ {
+   "Date": "12/17",
+   "Venue": "home",
+   "Initialism": "TOR",
+   "Nickname": "Maple Leafs",
+   "Longform": "Toronto Maple Leafs"
+ },
+ {
+   "Date": "12/19",
+   "Venue": "home",
+   "Initialism": "DET",
+   "Nickname": "Red Wings",
+   "Longform": "Detroit Red Wings"
+ },
+ {
+   "Date": "12/22",
+   "Venue": "away",
+   "Initialism": "OTT",
+   "Nickname": "Senators",
+   "Longform": "Ottawa Senators"
+ },
+ {
+   "Date": "12/23",
+   "Venue": "home",
+   "Initialism": "WPG",
+   "Nickname": "Jets",
+   "Longform": "Winnipeg Jets"
+ },
+ {
+   "Date": "12/27",
+   "Venue": "away",
+   "Initialism": "NYR",
+   "Nickname": "Rangers",
+   "Longform": "New York Rangers"
+ },
+ {
+   "Date": "12/29",
+   "Venue": "home",
+   "Initialism": "OTT",
+   "Nickname": "Senators",
+   "Longform": "Ottawa Senators"
+ },
+ {
+   "Date": "12/31",
+   "Venue": "home",
+   "Initialism": "MTL",
+   "Nickname": "Canadiens",
+   "Longform": "Montreal Canadiens"
+ },
+ {
+   "Date": "1/3",
+   "Venue": "home",
+   "Initialism": "BUF",
+   "Nickname": "Sabres",
+   "Longform": "Buffalo Sabres"
+ },
+ {
+   "Date": "1/5",
+   "Venue": "away",
+   "Initialism": "CBJ",
+   "Nickname": "Blue Jackets",
+   "Longform": "Columbus Blue Jackets"
+ },
+ {
+   "Date": "1/6",
+   "Venue": "home",
+   "Initialism": "NSH",
+   "Nickname": "Predators",
+   "Longform": "Nashville Predators"
+ },
+ {
+   "Date": "1/8",
+   "Venue": "home",
+   "Initialism": "CBJ",
+   "Nickname": "Blue Jackets",
+   "Longform": "Columbus Blue Jackets"
+ },
+ {
+   "Date": "1/11",
+   "Venue": "away",
+   "Initialism": "PHI",
+   "Nickname": "Flyers",
+   "Longform": "Philadelphia Flyers"
+ },
+ {
+   "Date": "1/14",
+   "Venue": "home",
+   "Initialism": "PHI",
+   "Nickname": "Flyers",
+   "Longform": "Philadelphia Flyers"
+ },
+ {
+   "Date": "1/16",
+   "Venue": "away",
+   "Initialism": "NYI",
+   "Nickname": "Islanders",
+   "Longform": "New York Islanders"
+ },
+ {
+   "Date": "1/17",
+   "Venue": "home",
+   "Initialism": "MIN",
+   "Nickname": "Wild",
+   "Longform": "Minnesota Wild"
+ },
+ {
+   "Date": "1/19",
+   "Venue": "away",
+   "Initialism": "ARI",
+   "Nickname": "Coyotes",
+   "Longform": "Arizona Coyotes"
+ },
+ {
+   "Date": "1/21",
+   "Venue": "away",
+   "Initialism": "VGK",
+   "Nickname": "Golden Knights",
+   "Longform": "Vegas Golden Knights"
+ },
+ {
+   "Date": "1/24",
+   "Venue": "away",
+   "Initialism": "COL",
+   "Nickname": "Avalanche",
+   "Longform": "Colorado Avalanche"
+ },
+ {
+   "Date": "1/26",
+   "Venue": "home",
+   "Initialism": "PIT",
+   "Nickname": "Penguins",
+   "Longform": "Pittsburgh Penguins"
+ },
+ {
+   "Date": "1/29",
+   "Venue": "away",
+   "Initialism": "TOR",
+   "Nickname": "Maple Leafs",
+   "Longform": "Toronto Maple Leafs"
+ },
+ {
+   "Date": "1/31",
+   "Venue": "away",
+   "Initialism": "CBJ",
+   "Nickname": "Blue Jackets",
+   "Longform": "Columbus Blue Jackets"
+ },
+ {
+   "Date": "2/11",
+   "Venue": "away",
+   "Initialism": "BOS",
+   "Nickname": "Bruins",
+   "Longform": "Boston Bruins"
+ },
+ {
+   "Date": "2/12",
+   "Venue": "home",
+   "Initialism": "SJS",
+   "Nickname": "Sharks",
+   "Longform": "San Jose Sharks"
+ },
+ {
+   "Date": "2/14",
+   "Venue": "home",
+   "Initialism": "CAR",
+   "Nickname": "Hurricanes",
+   "Longform": "Carolina Hurricanes"
+ },
+ {
+   "Date": "2/16",
+   "Venue": "home",
+   "Initialism": "FLA",
+   "Nickname": "Panthers",
+   "Longform": "Florida Panthers"
+ },
+ {
+   "Date": "2/18",
+   "Venue": "away",
+   "Initialism": "CAR",
+   "Nickname": "Hurricanes",
+   "Longform": "Carolina Hurricanes"
+ },
+ {
+   "Date": "2/21",
+   "Venue": "home",
+   "Initialism": "DET",
+   "Nickname": "Red Wings",
+   "Longform": "Detroit Red Wings"
+ },
+ {
+   "Date": "2/23",
+   "Venue": "home",
+   "Initialism": "ANA",
+   "Nickname": "Ducks",
+   "Longform": "Anaheim Ducks"
+ },
+ {
+   "Date": "2/25",
+   "Venue": "home",
+   "Initialism": "NYR",
+   "Nickname": "Rangers",
+   "Longform": "New York Rangers"
+ },
+ {
+   "Date": "2/26",
+   "Venue": "away",
+   "Initialism": "BUF",
+   "Nickname": "Sabres",
+   "Longform": "Buffalo Sabres"
+ },
+ {
+   "Date": "3/1",
+   "Venue": "away",
+   "Initialism": "ANA",
+   "Nickname": "Ducks",
+   "Longform": "Anaheim Ducks"
+ },
+ {
+   "Date": "3/4",
+   "Venue": "away",
+   "Initialism": "SJS",
+   "Nickname": "Sharks",
+   "Longform": "San Jose Sharks"
+ },
+ {
+   "Date": "3/6",
+   "Venue": "away",
+   "Initialism": "LAK",
+   "Nickname": "Kings",
+   "Longform": "Los Angeles Kings"
+ },
+ {
+   "Date": "3/9",
+   "Venue": "home",
+   "Initialism": "NJD",
+   "Nickname": "Devils",
+   "Longform": "New Jersey Devils"
+ },
+ {
+   "Date": "3/11",
+   "Venue": "away",
+   "Initialism": "NYI",
+   "Nickname": "Islanders",
+   "Longform": "New York Islanders"
+ },
+ {
+   "Date": "3/14",
+   "Venue": "away",
+   "Initialism": "NYR",
+   "Nickname": "Rangers",
+   "Longform": "New York Rangers"
+ },
+ {
+   "Date": "3/15",
+   "Venue": "home",
+   "Initialism": "BUF",
+   "Nickname": "Sabres",
+   "Longform": "Buffalo Sabres"
+ },
+ {
+   "Date": "3/17",
+   "Venue": "home",
+   "Initialism": "STL",
+   "Nickname": "Blues",
+   "Longform": "St Louis Blues"
+ },
+ {
+   "Date": "3/19",
+   "Venue": "away",
+   "Initialism": "MIN",
+   "Nickname": "Wild",
+   "Longform": "Minnesota Wild"
+ },
+ {
+   "Date": "3/21",
+   "Venue": "home",
+   "Initialism": "CBJ",
+   "Nickname": "Blue Jackets",
+   "Longform": "Columbus Blue Jackets"
+ },
+ {
+   "Date": "3/23",
+   "Venue": "home",
+   "Initialism": "CHI",
+   "Nickname": "Blackhawks",
+   "Longform": "Chicago Blackhawks"
+ },
+ {
+   "Date": "3/25",
+   "Venue": "away",
+   "Initialism": "PIT",
+   "Nickname": "Penguins",
+   "Longform": "Pittsburgh Penguins"
+ },
+ {
+   "Date": "3/29",
+   "Venue": "home",
+   "Initialism": "NYI",
+   "Nickname": "Islanders",
+   "Longform": "New York Islanders"
+ },
+ {
+   "Date": "3/30",
+   "Venue": "away",
+   "Initialism": "TBL",
+   "Nickname": "Lightning",
+   "Longform": "Tampa Bay Lightning"
+ },
+ {
+   "Date": "4/2",
+   "Venue": "home",
+   "Initialism": "NYR",
+   "Nickname": "Rangers",
+   "Longform": "New York Rangers"
+ },
+ {
+   "Date": "4/6",
+   "Venue": "away",
+   "Initialism": "MTL",
+   "Nickname": "Canadiens",
+   "Longform": "Montreal Canadiens"
+ },
+ {
+   "Date": "4/8",
+   "Venue": "home",
+   "Initialism": "FLA",
+   "Nickname": "Panthers",
+   "Longform": "Florida Panthers"
+ },
+ {
+   "Date": "4/10",
+   "Venue": "home",
+   "Initialism": "NYI",
+   "Nickname": "Islanders",
+   "Longform": "New York Islanders"
+ },
+ {
+   "Date": "4/11",
+   "Venue": "away",
+   "Initialism": "BOS",
+   "Nickname": "Bruins",
+   "Longform": "Boston Bruins"
+ },
+ {
+   "Date": "4/13",
+   "Venue": "home",
+   "Initialism": "NJD",
+   "Nickname": "Devils",
+   "Longform": "New Jersey Devils"
+ }
+]
