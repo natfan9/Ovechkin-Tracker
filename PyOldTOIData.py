@@ -43,6 +43,7 @@ rtlVenues = [
     "PNC Arena",
     "United Center",
     "Pepsi Center",
+    "Ball Arena",
     "American Airlines Center",
     "Little Caesars Arena",
     "Joe Louis Arena",
@@ -341,9 +342,14 @@ def dataScrape(gameID, venue, gamefeed):
     return {"time":strengths,"events":pandastrengthshotlist}
 
 def parseShift(period, start, end):
-    period = int(period) - 1
-    start = int(start) + (period * 1200)
-    end = int(end) + (period * 1200)
+    try:
+        int(period)
+    except:
+        pass
+    else:
+        p = int(period) - 1
+        start = int(start) + (p * 1200)
+        end = int(end) + (p * 1200)
     return [start,end]
 
 def parsePandaEventTime(period, time):
@@ -523,7 +529,7 @@ def main():
 
     # finalJSON = []
 
-    for i in range(0,1): # -6,1 to get 6 previous seasons plus current season
+    for i in range(-1,1): # -6,1 to get 6 previous seasons plus current season
         season = currentseason + i
         scheduleUrl = str("https://statsapi.web.nhl.com/api/v1/schedule?teamId=15&season=" + str(season) + str(season + 1) + "&gameType=R")
         print(scheduleUrl)
